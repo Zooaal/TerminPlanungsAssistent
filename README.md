@@ -52,7 +52,7 @@ Bonus #2: Konfigurieren Sie http/2.
 ```
 Bonus #1: Erreichen Sie eine Bewertung „A“
 ```
-9. Präsentation Ihres Projekts im Zeitumfang von max. 20 Minuten mit den Themen
+9. Präsentation Ihres Projekts im Zeitumfang von max. 20 Minuten mit den Themen <br>
     a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder <br>
     b. Welche Frameworks und Technologien haben Sie verwendet? (Skriptsprache,
        Frameworks, Webserver, ggf. Protokolle) <br>
@@ -72,7 +72,7 @@ weitergeben?
 10. Bonus: Verwenden Sie eine Quellcodeverwaltung
 11. Dokumentieren Sie bedeutende Stellen Ihres Quellcodes mit erklärendem
     Kommentartext
-12. Kurzdokumentation
+12. Kurzdokumentation <br>
     a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder mit
        Selbsteinschätzung <br>
     b. Test-Zugangsdaten sowie Url (und weitere Informationen sofern notwendig)
