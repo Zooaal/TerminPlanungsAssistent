@@ -85,10 +85,10 @@ weitergeben?
 
 ## Abgabe
 
-- Pro Gruppe eine .zip-Datei via Upload-Link (Link wird bereitgestellt)
-    o Quellcodes (ohne externe Komponenten und Pakete in einem Zip-Archiv)
-    o Präsentation als PDF-Datei
-    o Dokumentation als PDF-Datei
+- Pro Gruppe eine .zip-Datei via Upload-Link (Link wird bereitgestellt) <br>
+    o Quellcodes (ohne externe Komponenten und Pakete in einem Zip-Archiv) <br>
+    o Präsentation als PDF-Datei <br>
+    o Dokumentation als PDF-Datei <br>
 - Benennung der zip-Datei: „Gruppe_XX.zip“ (XX mit Gruppennummer ersetzen)
 
 
