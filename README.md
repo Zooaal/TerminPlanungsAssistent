@@ -53,12 +53,12 @@ Bonus #2: Konfigurieren Sie http/2.
 Bonus #1: Erreichen Sie eine Bewertung „A“
 ```
 9. Präsentation Ihres Projekts im Zeitumfang von max. 20 Minuten mit den Themen
-    a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder
+    a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder <br>
     b. Welche Frameworks und Technologien haben Sie verwendet? (Skriptsprache,
-       Frameworks, Webserver, ggf. Protokolle)
-    c. Kurzvorstellung des Projektes (Interaktive Vorstellung, ca. 10 Minuten)
-    d. Lessons Learned / Was waren die größten Probleme bei der Umsetzung?
-    e. Rückblick und Fazit
+       Frameworks, Webserver, ggf. Protokolle) <br>
+    c. Kurzvorstellung des Projektes (Interaktive Vorstellung, ca. 10 Minuten) <br>
+    d. Lessons Learned / Was waren die größten Probleme bei der Umsetzung? <br>
+    e. Rückblick und Fazit <br>
 
 ```
 Bonus #1: Empfehlung an andere Gruppen,
@@ -74,12 +74,12 @@ weitergeben?
     Kommentartext
 12. Kurzdokumentation
     a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder mit
-       Selbsteinschätzung
+       Selbsteinschätzung <br>
     b. Test-Zugangsdaten sowie Url (und weitere Informationen sofern notwendig)
-       für die Begutachtung des Projekts
+       für die Begutachtung des Projekts <br>
     c. Screenshots der Testergebnisse von gtmetrix.com und ssllabs.com der
-       Projektseite
-    d. Falls verwendet: Screenshot der Commit-Historie der Quellcodeverwaltung
+       Projektseite <br>
+    d. Falls verwendet: Screenshot der Commit-Historie der Quellcodeverwaltung <br>
 
 ## Abgabe
 
