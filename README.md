@@ -1,6 +1,4 @@
-## TerminPlanungsAssistent
-
-## Web Engineering II
+## Web Engineering II: TerminPlanungsAssistent
 
 ## Bearbeitungszeit & Rahmenbedingung
 
