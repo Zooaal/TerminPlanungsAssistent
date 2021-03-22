@@ -18,7 +18,6 @@ namespace Test.Pages
         {
             _logger = logger;
         }
-
         public void OnGet()
         {
             //MongoCRUD db = new MongoCRUD("TerminPlanungsAssistent");
