@@ -58,6 +58,7 @@ Bonus #1: Erreichen Sie eine Bewertung „A“
        Frameworks, Webserver, ggf. Protokolle)
     c. Kurzvorstellung des Projektes (Interaktive Vorstellung, ca. 10 Minuten)
     d. Lessons Learned / Was waren die größten Probleme bei der Umsetzung?
+    e. Rückblick und Fazit
 
 ```
 Bonus #1: Empfehlung an andere Gruppen,
@@ -65,9 +66,9 @@ bspw. Welche Tools/Komponenten haben besonders geholfen oder hatten
 einen Mehrwert, Welche Tipps&Tricks würden Sie an andere Gruppen
 weitergeben?
 ```
-```
-e. Rückblick und Fazit
-```
+
+
+
 10. Bonus: Verwenden Sie eine Quellcodeverwaltung
 11. Dokumentieren Sie bedeutende Stellen Ihres Quellcodes mit erklärendem
     Kommentartext
