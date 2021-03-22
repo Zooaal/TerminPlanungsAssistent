@@ -68,8 +68,10 @@ weitergeben?
 ```
 
 
-
+```
 10. Bonus: Verwenden Sie eine Quellcodeverwaltung
+```
+
 11. Dokumentieren Sie bedeutende Stellen Ihres Quellcodes mit erklärendem
     Kommentartext
 12. Kurzdokumentation <br>
