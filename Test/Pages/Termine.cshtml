@@ -1,0 +1,34 @@
+﻿@page
+@model PrivacyModel
+@using Test.Models;
+@{
+    ViewData["Title"] = "Meine Termine";
+    List<MeetingModel> meetings = ViewData["meetings"] as List<MeetingModel>;
+    int count = 0;
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Datum</th>
+            <th scope="col">Uhrzeit</th>
+            <th scope="col">Zeitspanne</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in meetings)
+            {
+                count++;
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@{@item.DateTime.Date.ToShortDateString();}</td>
+                    <td>@{ @item.DateTime.ToShortTimeString();}</td>
+                    <td>@item.TimeSpan.TotalHours Stunden</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

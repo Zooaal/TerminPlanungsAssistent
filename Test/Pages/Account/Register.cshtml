@@ -1,0 +1,51 @@
+﻿@page
+@model Test.Pages.Account.RegisterModel
+@{
+    ViewData["Titel"] = "Registrierung";
+    Layout = "~/Pages/Account/_AuthLayout.cshtml";
+    var Error = TempData["Error"] as string;
+    if (!string.IsNullOrEmpty(Error))
+    {
+        <h2 class="alert-danger" style="padding: 20px">@Error</h2>
+    }
+}
+
+<form method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Benutzername</label>
+                <input asp-for="CurrentUser.UserName" class="form-control" />
+                <span asp-validation-for="CurrentUser.UserName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" asp-for="CurrentUser.Email" class="form-control" />
+                <span asp-validation-for="CurrentUser.Email" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Passwort</label>
+                <input type="password" asp-for="CurrentUser.Password" class="form-control" />
+                <span asp-validation-for="CurrentUser.Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Passwort Wiederholen</label>
+                <input type="password" asp-for="CurrentUser.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="CurrentUser.ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrieren</button>
+</form>
+
+@section Scripts {
+    <partial name="~/Pages/Shared/_ValidationScriptsPartial.cshtml" />
+}

@@ -1,0 +1,45 @@
+﻿@page
+@model Test.Pages.LoginModel
+@{
+    ViewData["Titel"] = "Log in";
+    Layout = "~/Pages/Account/_AuthLayout.cshtml";
+    var Error = TempData["Error"] as string;
+    var Info = TempData["Info"] as string;
+    if (!string.IsNullOrEmpty(Error))
+    {
+        <h2 class="alert-danger" style="padding: 20px">@Error</h2>
+    }
+    else if (!string.IsNullOrEmpty(Info))
+    {
+        <h2 class="alert-info" style="padding: 20px">@Info</h2>
+    }
+}
+<div class="col col-md-10 offset-md-1">
+    <section>
+        <form method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input asp-for="CurrentUser.Email" class="form-control" />
+                        <span asp-validation-for="CurrentUser.Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Passwort</label>
+                        <input type="password" asp-for="CurrentUser.Password" class="form-control" />
+                        <span asp-validation-for="CurrentUser.Password" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Anmelden</button>
+        </form>
+    </section>
+</div>
+
+@section Scripts {
+    <partial name="~/Pages/Shared/_ValidationScriptsPartial.cshtml" />
+}
