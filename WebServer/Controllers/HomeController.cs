@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using WebServer.Models;
 
 namespace WebServer.Controllers
@@ -22,7 +23,16 @@ namespace WebServer.Controllers
         {
             return View();
         }
+        public IActionResult LoginView()
+        {
+            return View("~/Views/User/LoginView.cshtml");
+        }
+        public IActionResult RegisterView()
+        {
+            return View("~/Views/User/RegisterView.cshtml");
+        }
 
+        [ValidateAntiForgeryToken]
         public IActionResult Privacy()
         {
             return View();
