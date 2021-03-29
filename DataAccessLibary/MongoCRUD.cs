@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace DataAccessLibary
@@ -32,6 +33,13 @@ namespace DataAccessLibary
         {
             var collection = db.GetCollection<T>(table);
             var filter = Builders<T>.Filter.Eq("Email", email);
+            var result = collection.Find(filter).First();
+            return result;
+        }
+        public T LoadRecordByUserName<T>(string table, string userName)
+        {
+            var collection = db.GetCollection<T>(table);
+            var filter = Builders<T>.Filter.Eq("UserName", userName);
 
             return collection.Find(filter).First();
         }
