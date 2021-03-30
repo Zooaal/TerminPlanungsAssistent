@@ -8,7 +8,8 @@
     andere Hosting-Option
 
 ## Anforderungen an Projekt
-```
+
+
 - [x] 1
 - [ ] 2
 - [x] 3
@@ -26,8 +27,8 @@
 - [x] *10 (Bonus)
 - [ ] 11
 - [ ] 12
-```
 
+ 
  1. Entwickeln Sie eine Webanwendung auf Basis eines vorhandenen Webframeworks
     Ihrer gewählten Programmiersprache (bspw. ASP.NET MVC, Rails.js, CakePHP,
     Django, o.ä.)
