@@ -9,7 +9,7 @@
 
 ## Anforderungen an Projekt
 
-1. Entwickeln Sie eine Webanwendung auf Basis eines vorhandenen Webframeworks
+[ ] 1. Entwickeln Sie eine Webanwendung auf Basis eines vorhandenen Webframeworks
     Ihrer gewählten Programmiersprache (bspw. ASP.NET MVC, Rails.js, CakePHP,
     Django, o.ä.)
 2. Verbinden Sie eine Datenbank via einer ORM Komponente (bspw. Entity Framework,
