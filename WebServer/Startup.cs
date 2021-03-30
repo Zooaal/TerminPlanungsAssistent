@@ -49,11 +49,11 @@ namespace WebServer
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(SecretKey),
                         ValidateIssuer = true,
-                        ValidIssuer = "https://localhost:5000/",
+                        ValidIssuer = "http://localhost:5001/",
                         ValidateAudience = true,
                         //Here we are creating and using JWT within the same application. In this case base URL is fine
                         //If the JWT is created using a web service then this could be the consumer URL 
-                        ValidAudience = "https://localhost:5000/",
+                        ValidAudience = "http://localhost:5001/",
                         RequireExpirationTime = true,
                         ValidateLifetime = true,
                         ClockSkew = TimeSpan.Zero
