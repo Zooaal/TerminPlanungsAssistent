@@ -8,8 +8,27 @@
     andere Hosting-Option
 
 ## Anforderungen an Projekt
+```
+- [x] 1
+- [ ] 2
+- [x] 3
+- [x] 4
+- [x] 5
+- [x] *Bonus #1
+- [ ] *Bonus #2
+- [x] 6
+- [x] *Bonus #1
+- [x] *Bonus #2
+- [x] 7
+- [x] 8
+- [ ] *Bonus #1
+- [ ] 9
+- [x] *10 (Bonus)
+- [ ] 11
+- [ ] 12
+```
 
-[ ] 1. Entwickeln Sie eine Webanwendung auf Basis eines vorhandenen Webframeworks
+ 1. Entwickeln Sie eine Webanwendung auf Basis eines vorhandenen Webframeworks
     Ihrer gewählten Programmiersprache (bspw. ASP.NET MVC, Rails.js, CakePHP,
     Django, o.ä.)
 2. Verbinden Sie eine Datenbank via einer ORM Komponente (bspw. Entity Framework,
@@ -31,7 +50,7 @@ Bonus #1: Implementieren Sie die Autorisierung via JWT und stellen Sie ein Postm
 Testprojekt zur Verfügung
 ```
 ```
-Bonus # 2 : Stellen Sie zusätzlich das Updaten und Löschen von Datensätze mit
+Bonus #2 : Stellen Sie zusätzlich das Updaten und Löschen von Datensätze mit
 Postman Testprojekt um
 ```
 6. Richten Sie einen Webserver in Ihrer Testumgebung um und sichern Sie diese mit
