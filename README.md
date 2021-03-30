@@ -10,39 +10,22 @@
 ## Anforderungen an Projekt
 
 
-- [x] 1
-- [ ] 2
-- [x] 3
-- [x] 4
-- [x] 5
-- [x] *Bonus #1
-- [ ] *Bonus #2
-- [x] 6
-- [x] *Bonus #1
-- [x] *Bonus #2
-- [x] 7
-- [x] 8
-- [ ] *Bonus #1
-- [ ] 9
-- [x] *10 (Bonus)
-- [ ] 11
-- [ ] 12
-
- 
- 1. Entwickeln Sie eine Webanwendung auf Basis eines vorhandenen Webframeworks
+ - [x] 1. Entwickeln Sie eine Webanwendung auf Basis eines vorhandenen Webframeworks
     Ihrer gewählten Programmiersprache (bspw. ASP.NET MVC, Rails.js, CakePHP,
     Django, o.ä.)
-2. Verbinden Sie eine Datenbank via einer ORM Komponente (bspw. Entity Framework,
+- [ ] 2. Verbinden Sie eine Datenbank via einer ORM Komponente (bspw. Entity Framework,
     SQLAlchemy, Sequelize, o.ä.) und Implementieren Sie mindestens einmal die Fälle
     „Insert, Update, Delete, Select“
-3. Realisieren Sie mindestens eine einfache Benutzeroberfläche für die Interaktion mit
+
+- [x] 3. Realisieren Sie mindestens eine einfache Benutzeroberfläche für die Interaktion mit
     Ihrer Applikation mit einem vorhandenen CSS-Framework wie bspw. Bootstrap
     (MVC-Ansatz) oder eine „Single Page Application“ mit entsprechenden
     Datenschnittstellen.
-4. Implementieren Sie eine Benutzerregistrierung (Felder: Name / E-Mail / Kennwort /
+
+- [x] 4. Implementieren Sie eine Benutzerregistrierung (Felder: Name / E-Mail / Kennwort /
     Kennwort wiederholen) sowie einen Benutzerlogin (Name oder E-Mail und
     Kennwort).
-5. Implementieren Sie eine API (SOAP oder REST) zur Kommunikation mit einem Client.
+- [x] 5. Implementieren Sie eine API (SOAP oder REST) zur Kommunikation mit einem Client.
     Unterstützen Sie dabei mindestens den Abruf von Informationen aus Ihrer
     Datenbank.
 
@@ -54,7 +37,7 @@ Testprojekt zur Verfügung
 Bonus #2 : Stellen Sie zusätzlich das Updaten und Löschen von Datensätze mit
 Postman Testprojekt um
 ```
-6. Richten Sie einen Webserver in Ihrer Testumgebung um und sichern Sie diese mit
+- [x] 6. Richten Sie einen Webserver in Ihrer Testumgebung um und sichern Sie diese mit
     einem „Let’s Encrypt“ Zertifikat ab. Prüfen Sie Ihre Konfiguration mit „ssllabs.com“ –
     es muss mindestens ein A als Bewertung erreicht werden.
 
@@ -63,16 +46,16 @@ Bonus #1: Erreichen Sie A+ mit Ihrer Konfiguration
 Bonus #2: Konfigurieren Sie http/2.
 ```
 
-7. Ihre Website muss öffentlich erreichbar sein (Notwendiger DNS-Eintrag und Server
+- [x] 7. Ihre Website muss öffentlich erreichbar sein (Notwendiger DNS-Eintrag und Server
     wird gestellt)
-8. Optimieren der Ressourcen: „Minify“ von Javascript- und CSS-Dateien; Verkleinerte
+- [x] 8. Optimieren der Ressourcen: „Minify“ von Javascript- und CSS-Dateien; Verkleinerte
     Grafiken. Prüfen Sie Ihre Optimierung mit „gtmetrix.com“, erreichen Sie mindestens
     die Bewertung C.
 
 ```
 Bonus #1: Erreichen Sie eine Bewertung „A“
 ```
-9. Präsentation Ihres Projekts im Zeitumfang von max. 20 Minuten mit den Themen <br>
+- [ ] 9. Präsentation Ihres Projekts im Zeitumfang von max. 20 Minuten mit den Themen <br>
     a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder <br>
     b. Welche Frameworks und Technologien haben Sie verwendet? (Skriptsprache,
        Frameworks, Webserver, ggf. Protokolle) <br>
@@ -92,9 +75,9 @@ weitergeben?
 10. Bonus: Verwenden Sie eine Quellcodeverwaltung
 ```
 
-11. Dokumentieren Sie bedeutende Stellen Ihres Quellcodes mit erklärendem
+- [ ] 11. Dokumentieren Sie bedeutende Stellen Ihres Quellcodes mit erklärendem
     Kommentartext
-12. Kurzdokumentation <br>
+- [ ] 12. Kurzdokumentation <br>
     a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder mit
        Selbsteinschätzung <br>
     b. Test-Zugangsdaten sowie Url (und weitere Informationen sofern notwendig)
