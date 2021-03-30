@@ -44,6 +44,11 @@ namespace WebServer.Controllers
                 email = dict.Values.First();
             }
             var meetings = meetingConnector.GetUserMeetings(email).Value;
+            if (User.HasClaim(Roles.ADMIN, Roles.ADMIN))
+            {
+                var result = meetingConnector.GetAllMeetings().Value;
+                meetings = result.FindAll(m => m.Taken);
+            }
             ViewData["meetings"] = meetings;
             return View();
         }

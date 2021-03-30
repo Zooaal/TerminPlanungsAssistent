@@ -47,5 +47,30 @@ namespace WebServer.Services
                 return new LogikReturn<List<MeetingModel>>(ReturnStatus.DbError, null);
             }
         }
+
+        public LogikReturn<MeetingModel> GetMeetingById(MeetingModel model)
+        {
+            try
+            {
+                var meeting = _db.LoadRecordById<MeetingModel>("Meetings", model.ID);
+                return new LogikReturn<MeetingModel>(ReturnStatus.Ok, meeting);
+            }
+            catch (Exception e)
+            {
+                return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
+            }
+        }
+        public LogikReturn<MeetingModel> DeleteMeetingById(MeetingModel model)
+        {
+            try
+            {
+                _db.DeleteRecord<MeetingModel>("Meetings", model.ID);
+                return new LogikReturn<MeetingModel>(ReturnStatus.Ok, null);
+            }
+            catch (Exception e)
+            {
+                return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
+            }
+        }
     }
 }
