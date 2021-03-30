@@ -3,12 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebServer.Models;
 using WebServer.Services;
 
 namespace WebServer.Controllers
 {
+    [ApiController]
+    [Route("MeetingController/")]
     public class MeetingController : Controller
     {
         private readonly MeetingConnector meetingConnector;
@@ -16,10 +19,13 @@ namespace WebServer.Controllers
         {
             meetingConnector = new MeetingConnector();
         }
-        // GET: MeetingController/Create
-        public ActionResult Create()
+        // GET: MeetingController/AllMeetings
+        [HttpGet]
+        [Route("All")]
+        public ActionResult AllMeetings()
         {
-            return View();
+            var meetings = meetingConnector.GetAllMeetings();
+            return Ok(meetings.Value);
         }
 
         // POST: MeetingController/Create
