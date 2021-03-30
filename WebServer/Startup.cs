@@ -26,10 +26,7 @@ namespace WebServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<ForwardedHeadersOptions>(options =>
-            {
-                options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
-            });
+            
 
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
@@ -52,11 +49,11 @@ namespace WebServer
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(SecretKey),
                         ValidateIssuer = true,
-                        ValidIssuer = "http://localhost:5001/",
+                        ValidIssuer = "https://localhost:5000/",
                         ValidateAudience = true,
                         //Here we are creating and using JWT within the same application. In this case base URL is fine
                         //If the JWT is created using a web service then this could be the consumer URL 
-                        ValidAudience = "http://localhost:5001/",
+                        ValidAudience = "https://localhost:5000/",
                         RequireExpirationTime = true,
                         ValidateLifetime = true,
                         ClockSkew = TimeSpan.Zero
@@ -81,7 +78,7 @@ namespace WebServer
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
