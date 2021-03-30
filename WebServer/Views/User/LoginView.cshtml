@@ -2,6 +2,18 @@
 @{
     ViewData["Title"] = "LoginView";
     Layout = "~/Views/User/_AuthLayout.cshtml";
+    var Error = TempData["Error"] as string;
+    if (!string.IsNullOrEmpty(Error))
+    {
+        if (Error.Contains("Erfolg"))
+        {
+            <h2 class="alert-info" style="padding: 20px">@Error</h2>
+        }
+        else
+        {
+            <h2 class="alert-danger" style="padding: 20px">@Error</h2>
+        }
+    }
 }
 
 <div class="col col-md-10 offset-md-1">

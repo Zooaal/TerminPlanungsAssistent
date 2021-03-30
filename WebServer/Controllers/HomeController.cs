@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using WebServer.Models;
+using WebServer.Services;
+using System.Security.Claims;
 
 namespace WebServer.Controllers
 {
@@ -31,10 +33,18 @@ namespace WebServer.Controllers
         {
             return View("~/Views/User/RegisterView.cshtml");
         }
-
-        [ValidateAntiForgeryToken]
-        public IActionResult Privacy()
+        [Authorized]
+        public IActionResult Meetings()
         {
+            var meetingConnector = new MeetingConnector();
+            string email = "";
+            if (User.Identity.IsAuthenticated)
+            {
+                var dict = User.Claims.Where(p => p.Type == ClaimTypes.Email).ToDictionary(p => p.Type, p => p.Value);
+                email = dict.Values.First();
+            }
+            var meetings = meetingConnector.GetUserMeetings(email).Value;
+            ViewData["meetings"] = meetings;
             return View();
         }
 

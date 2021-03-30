@@ -16,12 +16,10 @@ namespace WebServer.Services
     {
         private IConfiguration Configuration { get; }
         private readonly LoginConnector loginConnector;
-        private readonly ILogger _logger;
 
-        public UserService(IConfiguration configuration)//, ILogger logger)
+        public UserService(IConfiguration configuration)
         {
             Configuration = configuration;
-            //_logger = logger;
             loginConnector = new LoginConnector();
         }
 
@@ -49,26 +47,16 @@ namespace WebServer.Services
             IEnumerable<Claim> claims = new Claim[]
                     {
                     new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(ClaimTypes.Email, user.Email)
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(user.AccessLevel, user.AccessLevel)
                     };
             return claims;
         }
 
-        private string GenerateJwtToken(UserModel user)
+        public LogikReturn<UserModel> RegisterUser(string username, string email, string password)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(Configuration["JWT:Secret"]);
-            var tokenDescriptor = new SecurityTokenDescriptor()
-            {
-                Subject = new ClaimsIdentity(new []
-                {
-                    new Claim("Username", user.UserName)
-                }),
-                Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            var result = loginConnector.Register(username, email, password);
+            return result;
         }
     }
 }

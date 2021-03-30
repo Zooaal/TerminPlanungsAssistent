@@ -75,13 +75,16 @@ namespace WebServer.Services
                     Email = email,
                     UserName = username,
                     Password = BC.HashPassword(password),
-                    Meetings = new List<Guid>()
+                    Meetings = new List<Guid>(),
+                    AccessLevel = Roles.CUST
                 };
                 _db.InsertRecord<UserModel>("Users", new UserModel() 
                     { Email = email, 
                     UserName = username, 
                     Password = BC.HashPassword(password), 
-                    Meetings = new List<Guid>() });
+                    Meetings = new List<Guid>(),
+                    AccessLevel = Roles.CUST
+                });
                 return new LogikReturn<UserModel>(ReturnStatus.Ok, user);
             }catch(Exception e)
             {

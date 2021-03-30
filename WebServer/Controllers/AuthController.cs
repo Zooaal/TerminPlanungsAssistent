@@ -57,5 +57,33 @@ namespace WebServer.Controllers
                 return View("~/Views/User/LoginView.cshtml");
             }
         }
+
+        [HttpPost]
+        public IActionResult Register(UserModel CurrentUser)
+        {
+            if (CurrentUser.Password != CurrentUser.ConfirmPassword)
+            {
+                TempData["Error"] = "Ungleiche Passwörter";
+                return View("~/Views/User/RegisterView.cshtml");
+            }
+
+            var result = _userService.RegisterUser(CurrentUser.UserName, CurrentUser.Email, CurrentUser.Password);
+
+            if (result.ReturnStatus.Equals(ReturnStatus.Ok))
+            {
+                TempData["Error"] = "Erfolgreich Registriert";
+                return Redirect("~/Home/LoginView");
+            }
+            else if (result.ReturnStatus.Equals(ReturnStatus.Existing))
+            {
+                TempData["Error"] = "Email oder Benutzer Name bereits vorhanden";
+                return View("~/Views/User/RegisterView.cshtml");
+            }
+            else
+            {
+                TempData["Error"] = "Datenbank Verbindung verloren";
+                return View("~/Views/User/RegisterView.cshtml");
+            }
+        }
     }
 }
