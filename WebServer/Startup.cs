@@ -31,7 +31,6 @@ namespace WebServer
                 options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
             });
 
-
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
             });
@@ -73,7 +72,6 @@ namespace WebServer
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
-            app.UseAuthentication();
 
             if (env.IsDevelopment())
             {

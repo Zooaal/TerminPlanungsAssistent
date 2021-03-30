@@ -47,7 +47,7 @@ namespace WebServer.Controllers
             ViewData["meetings"] = meetings;
             return View();
         }
-        [Authorized(Roles.ADMIN)]
+        [Authorized]
         public IActionResult AdminMeetings()
         {
             var meetingConnector = new MeetingConnector();
