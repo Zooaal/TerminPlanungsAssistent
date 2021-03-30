@@ -33,5 +33,19 @@ namespace WebServer.Services
                 return new LogikReturn<List<MeetingModel>>(ReturnStatus.DbError, null);
             }
         }
+
+        public LogikReturn<List<MeetingModel>> GetAllMeetings()
+        {
+            try
+            {
+                List<MeetingModel> meetings = new List<MeetingModel>();
+                meetings = _db.LoadRecords<MeetingModel>("Meetings");
+                return new LogikReturn<List<MeetingModel>>(ReturnStatus.Ok, meetings);
+            }
+            catch (Exception e)
+            {
+                return new LogikReturn<List<MeetingModel>>(ReturnStatus.DbError, null);
+            }
+        }
     }
 }

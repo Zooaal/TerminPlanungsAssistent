@@ -47,6 +47,14 @@ namespace WebServer.Controllers
             ViewData["meetings"] = meetings;
             return View();
         }
+        [Authorized(Roles.ADMIN)]
+        public IActionResult AdminMeetings()
+        {
+            var meetingConnector = new MeetingConnector();
+            var meetings = meetingConnector.GetAllMeetings().Value;
+            ViewData["meetings"] = meetings;
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
