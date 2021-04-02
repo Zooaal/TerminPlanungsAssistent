@@ -31,7 +31,8 @@
   ```
   Bonus:
   Implementieren Sie die Autorisierung via JWT und stellen Sie ein Postman Testprojekt zur Verfügung 
-
+  ```
+  ```
   Bonus:
   Stellen Sie zusätzlich das Updaten und Löschen von Datensätze mit
   Postman Testprojekt um
@@ -43,7 +44,8 @@
     ```
     Bonus:
     Erreichen Sie A+ mit Ihrer Konfiguration
-
+    ```
+    ```
     Bonus:
     Konfigurieren Sie http/2.
     ```
