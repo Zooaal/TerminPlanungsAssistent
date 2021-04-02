@@ -12,7 +12,7 @@ namespace DataAccessLibary
         private IMongoDatabase db;
         public MongoCRUD(string database)
         {
-            var client = new MongoClient();
+            var client = new MongoClient("mongodb://localhost:27017");
             db = client.GetDatabase(database);
         }
 
