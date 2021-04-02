@@ -12,7 +12,7 @@
 @section Scripts
 {
     <script src="~/fullcalendar/main.js"></script>
-    <script src="~/fullcalendar/core/locales/de.js"></script>
+    <script src="~/fullcalendar/locales/de.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
@@ -23,7 +23,7 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,listWeek'
                 },
-                local: 'de'
+                locale: 'de'
             });
             calendar.render();
         });
