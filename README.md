@@ -28,38 +28,37 @@
 - [x] 5. Implementieren Sie eine API (SOAP oder REST) zur Kommunikation mit einem Client.
     Unterstützen Sie dabei mindestens den Abruf von Informationen aus Ihrer
     Datenbank.
+    ```
+    Bonus:
+    Implementieren Sie die Autorisierung via JWT und stellen Sie ein Postman
+    Testprojekt zur Verfügung 
 
-```
-Bonus:
-Implementieren Sie die Autorisierung via JWT und stellen Sie ein Postman
-Testprojekt zur Verfügung 
-
-Bonus:
-Stellen Sie zusätzlich das Updaten und Löschen von Datensätze mit
-Postman Testprojekt um
-```
+    Bonus:
+    Stellen Sie zusätzlich das Updaten und Löschen von Datensätze mit
+    Postman Testprojekt um
+    ```
+    
 - [x] 6. Richten Sie einen Webserver in Ihrer Testumgebung um und sichern Sie diese mit
     einem „Let’s Encrypt“ Zertifikat ab. Prüfen Sie Ihre Konfiguration mit „ssllabs.com“ –
     es muss mindestens ein A als Bewertung erreicht werden.
+    ```
+    Bonus:
+    Erreichen Sie A+ mit Ihrer Konfiguration
 
-```
-Bonus:
-Erreichen Sie A+ mit Ihrer Konfiguration
-
-Bonus:
-Konfigurieren Sie http/2.
-```
+    Bonus:
+    Konfigurieren Sie http/2.
+    ```
 
 - [x] 7. Ihre Website muss öffentlich erreichbar sein (Notwendiger DNS-Eintrag und Server
     wird gestellt)
 - [x] 8. Optimieren der Ressourcen: „Minify“ von Javascript- und CSS-Dateien; Verkleinerte
     Grafiken. Prüfen Sie Ihre Optimierung mit „gtmetrix.com“, erreichen Sie mindestens
     die Bewertung C.
-
-```
-Bonus:
-Erreichen Sie eine Bewertung „A“
-```
+    ```
+    Bonus:
+    Erreichen Sie eine Bewertung „A“
+    ```
+    
 - [ ] 9. Präsentation Ihres Projekts im Zeitumfang von max. 20 Minuten mit den Themen <br>
     a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder <br>
     b. Welche Frameworks und Technologien haben Sie verwendet? (Skriptsprache,
@@ -67,20 +66,18 @@ Erreichen Sie eine Bewertung „A“
     c. Kurzvorstellung des Projektes (Interaktive Vorstellung, ca. 10 Minuten) <br>
     d. Lessons Learned / Was waren die größten Probleme bei der Umsetzung? <br>
     e. Rückblick und Fazit <br>
+    ```
+    Bonus:
+    Empfehlung an andere Gruppen,
+    bspw. Welche Tools/Komponenten haben besonders geholfen oder hatten
+    einen Mehrwert, Welche Tipps&Tricks würden Sie an andere Gruppen
+    weitergeben?
+    ```
 
-```
-Bonus:
-Empfehlung an andere Gruppen,
-bspw. Welche Tools/Komponenten haben besonders geholfen oder hatten
-einen Mehrwert, Welche Tipps&Tricks würden Sie an andere Gruppen
-weitergeben?
-```
-
-
-```
-Bonus:
-Verwenden Sie eine Quellcodeverwaltung
-```
+    ```
+    Bonus:
+    Verwenden Sie eine Quellcodeverwaltung
+    ```
 
 - [ ] 10. Dokumentieren Sie bedeutende Stellen Ihres Quellcodes mit erklärendem
     Kommentartext
