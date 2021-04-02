@@ -30,11 +30,12 @@
     Datenbank.
 
 ```
-Bonus #1: Implementieren Sie die Autorisierung via JWT und stellen Sie ein Postman
-Testprojekt zur Verfügung
-```
-```
-Bonus #2 : Stellen Sie zusätzlich das Updaten und Löschen von Datensätze mit
+Bonus:
+Implementieren Sie die Autorisierung via JWT und stellen Sie ein Postman
+Testprojekt zur Verfügung 
+
+Bonus:
+Stellen Sie zusätzlich das Updaten und Löschen von Datensätze mit
 Postman Testprojekt um
 ```
 - [x] 6. Richten Sie einen Webserver in Ihrer Testumgebung um und sichern Sie diese mit
@@ -42,8 +43,11 @@ Postman Testprojekt um
     es muss mindestens ein A als Bewertung erreicht werden.
 
 ```
-Bonus #1: Erreichen Sie A+ mit Ihrer Konfiguration
-Bonus #2: Konfigurieren Sie http/2.
+Bonus:
+Erreichen Sie A+ mit Ihrer Konfiguration
+
+Bonus:
+Konfigurieren Sie http/2.
 ```
 
 - [x] 7. Ihre Website muss öffentlich erreichbar sein (Notwendiger DNS-Eintrag und Server
@@ -53,7 +57,8 @@ Bonus #2: Konfigurieren Sie http/2.
     die Bewertung C.
 
 ```
-Bonus #1: Erreichen Sie eine Bewertung „A“
+Bonus:
+Erreichen Sie eine Bewertung „A“
 ```
 - [ ] 9. Präsentation Ihres Projekts im Zeitumfang von max. 20 Minuten mit den Themen <br>
     a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder <br>
@@ -64,7 +69,8 @@ Bonus #1: Erreichen Sie eine Bewertung „A“
     e. Rückblick und Fazit <br>
 
 ```
-Bonus #1: Empfehlung an andere Gruppen,
+Bonus:
+Empfehlung an andere Gruppen,
 bspw. Welche Tools/Komponenten haben besonders geholfen oder hatten
 einen Mehrwert, Welche Tipps&Tricks würden Sie an andere Gruppen
 weitergeben?
@@ -72,12 +78,13 @@ weitergeben?
 
 
 ```
-10. Bonus: Verwenden Sie eine Quellcodeverwaltung
+Bonus:
+Verwenden Sie eine Quellcodeverwaltung
 ```
 
-- [ ] 11. Dokumentieren Sie bedeutende Stellen Ihres Quellcodes mit erklärendem
+- [ ] 10. Dokumentieren Sie bedeutende Stellen Ihres Quellcodes mit erklärendem
     Kommentartext
-- [ ] 12. Kurzdokumentation <br>
+- [ ] 11. Kurzdokumentation <br>
     a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder mit
        Selbsteinschätzung <br>
     b. Test-Zugangsdaten sowie Url (und weitere Informationen sofern notwendig)
