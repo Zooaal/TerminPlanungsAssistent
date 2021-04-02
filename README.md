@@ -10,33 +10,32 @@
 ## Anforderungen an Projekt
 
 
- - [x] 1. Entwickeln Sie eine Webanwendung auf Basis eines vorhandenen Webframeworks
-    Ihrer gewählten Programmiersprache (bspw. ASP.NET MVC, Rails.js, CakePHP,
-    Django, o.ä.)
-- [ ] 2. Verbinden Sie eine Datenbank via einer ORM Komponente (bspw. Entity Framework,
-    SQLAlchemy, Sequelize, o.ä.) und Implementieren Sie mindestens einmal die Fälle
-    „Insert, Update, Delete, Select“
+ - [x]  1. Entwickeln Sie eine Webanwendung auf Basis eines vorhandenen Webframeworks
+        Ihrer gewählten Programmiersprache (bspw. ASP.NET MVC, Rails.js, CakePHP,
+        Django, o.ä.)
+- [ ]   2. Verbinden Sie eine Datenbank via einer ORM Komponente (bspw. Entity Framework,
+        SQLAlchemy, Sequelize, o.ä.) und Implementieren Sie mindestens einmal die Fälle
+        „Insert, Update, Delete, Select“
 
-- [x] 3. Realisieren Sie mindestens eine einfache Benutzeroberfläche für die Interaktion mit
-    Ihrer Applikation mit einem vorhandenen CSS-Framework wie bspw. Bootstrap
-    (MVC-Ansatz) oder eine „Single Page Application“ mit entsprechenden
-    Datenschnittstellen.
+- [x]   3. Realisieren Sie mindestens eine einfache Benutzeroberfläche für die Interaktion mit
+        Ihrer Applikation mit einem vorhandenen CSS-Framework wie bspw. Bootstrap
+        (MVC-Ansatz) oder eine „Single Page Application“ mit entsprechenden
+        Datenschnittstellen.
 
-- [x] 4. Implementieren Sie eine Benutzerregistrierung (Felder: Name / E-Mail / Kennwort /
-    Kennwort wiederholen) sowie einen Benutzerlogin (Name oder E-Mail und
-    Kennwort).
-- [x] 5. Implementieren Sie eine API (SOAP oder REST) zur Kommunikation mit einem Client.
-    Unterstützen Sie dabei mindestens den Abruf von Informationen aus Ihrer
-    Datenbank.
-    ```
-    Bonus:
-    Implementieren Sie die Autorisierung via JWT und stellen Sie ein Postman
-    Testprojekt zur Verfügung 
+- [x]   4. Implementieren Sie eine Benutzerregistrierung (Felder: Name / E-Mail / Kennwort /
+        Kennwort wiederholen) sowie einen Benutzerlogin (Name oder E-Mail und
+        Kennwort).
+- [x]   5. Implementieren Sie eine API (SOAP oder REST) zur Kommunikation mit einem Client.
+        Unterstützen Sie dabei mindestens den Abruf von Informationen aus Ihrer
+        Datenbank.
+  ```
+  Bonus:
+  Implementieren Sie die Autorisierung via JWT und stellen Sie ein Postman Testprojekt zur Verfügung 
 
-    Bonus:
-    Stellen Sie zusätzlich das Updaten und Löschen von Datensätze mit
-    Postman Testprojekt um
-    ```
+  Bonus:
+  Stellen Sie zusätzlich das Updaten und Löschen von Datensätze mit
+  Postman Testprojekt um
+  ```
     
 - [x] 6. Richten Sie einen Webserver in Ihrer Testumgebung um und sichern Sie diese mit
     einem „Let’s Encrypt“ Zertifikat ab. Prüfen Sie Ihre Konfiguration mit „ssllabs.com“ –
