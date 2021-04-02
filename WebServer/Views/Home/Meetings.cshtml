@@ -5,7 +5,6 @@
     int count = 0;
 }
 <h1>@ViewData["Title"]</h1>
-
 <table class="table">
     <thead>
     <tr>
@@ -30,3 +29,26 @@
     }
     </tbody>
 </table>
+<meta charset='utf-8' />
+<link href="~/fullcalendar/main.css" rel='stylesheet' />
+<div id='calendar'></div>
+@section Scripts
+{
+    <script src="~/fullcalendar/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                },
+                local: 'de'
+            });
+            calendar.render();
+        });
+    </script>
+}
+
