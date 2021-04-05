@@ -49,6 +49,9 @@ namespace WebServer.Controllers
                 var result = meetingConnector.GetAllMeetings().Value;
                 meetings = result.FindAll(m => m.Taken);
             }
+            //ViewData["meetings"] = meetings;
+            DateTime date = DateTime.Now;
+            meetings.Add(new MeetingModel() { ID = new Guid(), DateTime = date, TimeSpan = new TimeSpan(), Taken = false});
             ViewData["meetings"] = meetings;
             return View();
         }

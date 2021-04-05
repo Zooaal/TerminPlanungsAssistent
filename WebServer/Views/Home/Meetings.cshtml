@@ -8,12 +8,34 @@
 
 <meta charset='utf-8' />
 <link href="~/fullcalendar/main.css" rel='stylesheet' />
+<table id="tabel">
+    @foreach (MeetingModel m in meetings)
+    {
+        <tr>
+            <td>@m.ID</td>
+            <td>@m.DateTime.ToShortDateString()</td>
+            <td>@m.TimeSpan</td>
+        </tr>
+    }
+</table>
 <div id='calendar'></div>
 @section Scripts
 {
     <script src="~/fullcalendar/main.js"></script>
     <script src="~/fullcalendar/locales/de.js"></script>
     <script>
+        /*var eventArr = [];
+        var eventtable = document.getElementById("table");
+        var trElement = eventtable.getElementsByTagName("tr");
+        for (var tr of trElement) {
+            var tdElement = tr.getElementsByTagName("td");
+            var eventObj = {
+                id: tdElement[0].innerText,
+                title: tdElement[1].innerText,
+                start: tdElement[1].innerText
+            }
+            eventArr.push(eventObj);
+        }*/
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -24,7 +46,8 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,listWeek'
                 },
-                locale: 'de'
+                locale: 'de',
+                //events: eventArr
             });
             calendar.render();
         });
