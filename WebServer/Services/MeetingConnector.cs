@@ -47,6 +47,20 @@ namespace WebServer.Services
                 return new LogikReturn<List<MeetingModel>>(ReturnStatus.DbError, null);
             }
         }
+        public LogikReturn<List<MeetingModel>> GetAllNotTakenMeetings()
+        {
+            try
+            {
+                List<MeetingModel> meetings = new List<MeetingModel>();
+                meetings = _db.LoadRecords<MeetingModel>("Meetings");
+                var result = meetings.Where(m => m.Taken == false).ToList();
+                return new LogikReturn<List<MeetingModel>>(ReturnStatus.Ok, result);
+            }
+            catch (Exception e)
+            {
+                return new LogikReturn<List<MeetingModel>>(ReturnStatus.DbError, null);
+            }
+        }
 
         public LogikReturn<MeetingModel> GetMeetingById(MeetingModel model)
         {
@@ -89,6 +103,34 @@ namespace WebServer.Services
             try
             {
                 _db.UpsertRecord<MeetingModel>("Meetings", model.ID, model);
+                return new LogikReturn<MeetingModel>(ReturnStatus.Ok, null);
+            }
+            catch (Exception e)
+            {
+                return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
+            }
+        }
+        public LogikReturn<MeetingModel> UpsertMeetingForUser(MeetingModel model, UserModel user)
+        {
+            try
+            {
+                var currentUser = _db.LoadRecordByUserName<UserModel>("Users", user.UserName);
+                currentUser.Meetings.Add(model.ID);
+                _db.UpsertRecord<UserModel>("Users", currentUser.Id, currentUser);
+                return new LogikReturn<MeetingModel>(ReturnStatus.Ok, null);
+            }
+            catch (Exception e)
+            {
+                return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
+            }
+        }
+        public LogikReturn<MeetingModel> CancelMeetingForUser(MeetingModel model, UserModel user)
+        {
+            try
+            {
+                var currentUser = _db.LoadRecordByUserName<UserModel>("Users", user.UserName);
+                currentUser.Meetings.Remove(model.ID);
+                _db.UpsertRecord<UserModel>("Users", currentUser.Id, currentUser);
                 return new LogikReturn<MeetingModel>(ReturnStatus.Ok, null);
             }
             catch (Exception e)

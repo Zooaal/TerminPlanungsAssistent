@@ -10,6 +10,7 @@ namespace DataAccessLibary
     public class MongoCRUD
     {
         private IMongoDatabase db;
+        
         public MongoCRUD(string database)
         {
             var client = new MongoClient("mongodb://localhost:27017");
@@ -20,6 +21,7 @@ namespace DataAccessLibary
         {
             var collection = db.GetCollection<T>(table);
             collection.InsertOne(record);
+            
         }
 
         public List<T> LoadRecords<T>(string table)

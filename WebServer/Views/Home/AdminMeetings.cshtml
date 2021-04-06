@@ -44,8 +44,8 @@
                         {
                             <form method="post">
                                 <input type="hidden" asp-for="ID" value="@item.ID"/>
-                                <button type="submit" asp-controller="Meeting" asp-action="Edit" class="btn btn-primary btn-block">Ändern</button>
-                                <button type="submit" asp-controller="Meeting" asp-action="Delete" class="btn btn-primary btn-block">Löschen</button>
+                                <button type="submit" asp-controller="Meeting" asp-action="Edit" class="btn btn-primary">Ändern</button>
+                                <button type="submit" asp-controller="Meeting" asp-action="Delete" class="btn btn-primary">Löschen</button>
                             </form>
                         }
                     }
@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Datum</label>
+                        <label>Datum/Uhrzeit</label>
                         <input type="datetime-local" asp-for="DateTime" class="form-control" />
                     </div>
                 </div>
@@ -70,13 +70,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Zeitspanne</label>
+                        <label>Zeitspanne:</label>
                         <select asp-for="TimeSpan">
                             <option value="0.5">0.5</option>
                             <option value="1.0">1.0</option>
                             <option value="1.5">1.5</option>
                             <option value="2.0">2.0</option>
                         </select>
+                        <label>Stunden</label>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,40 @@
+﻿@using Microsoft.CodeAnalysis
+@model WebServer.Models.MeetingModel
+@{
+    MeetingModel meeting = ViewData["meeting"] as MeetingModel;
+    string date = meeting.DateTime.ToString("yyyy-MM-ddTHH:mm");
+    int i1;
+    int i2;
+}
+<h1>Termin ändern</h1>
+<div class="col col-md-10 offset-md-1">
+    <section>
+        <form method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="ID" value="@meeting.ID" />
+                        <input type="hidden" asp-for="Taken" value="@meeting.Taken" />
+                        <label>Datum/Uhrzeit</label>
+                        <input type="datetime-local" asp-for="DateTime" value="@date" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Zeitspanne:</label>
+                        <select asp-for="TimeSpan">
+                            <option value="0.5">0.5</option>
+                            <option value="1.0">1.0</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2.0">2.0</option>
+                        </select>
+                        <label>Stunden</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" asp-controller="Meeting" asp-action="EditMeeting" class="btn btn-primary btn-block">Ändern</button>
+        </form>
+    </section>
+</div>

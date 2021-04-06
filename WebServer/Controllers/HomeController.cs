@@ -49,10 +49,9 @@ namespace WebServer.Controllers
                 var result = meetingConnector.GetAllMeetings().Value;
                 meetings = result.FindAll(m => m.Taken);
             }
-            //ViewData["meetings"] = meetings;
-            //DateTime date = DateTime.Now;
-            //meetings.Add(new MeetingModel() { ID = new Guid(), DateTime = date, TimeSpan = new TimeSpan(), Taken = false});
-            var allMeetings = meetingConnector.GetAllMeetings().Value;
+            var allMeetings = meetingConnector.GetAllNotTakenMeetings().Value;
+            meetings = meetings.OrderBy(x => x.DateTime).ToList();
+            allMeetings = allMeetings.OrderBy(x => x.DateTime).ToList();
             ViewData["allMeetings"] = allMeetings;
             ViewData["meetings"] = meetings;
             return View();
@@ -62,6 +61,7 @@ namespace WebServer.Controllers
         {
             var meetingConnector = new MeetingConnector();
             var meetings = meetingConnector.GetAllMeetings().Value;
+            meetings = meetings.OrderBy(x => x.DateTime).ToList();
             ViewData["meetings"] = meetings;
             return View();
         }
