@@ -101,6 +101,9 @@ namespace WebServer.Controllers
             try
             {
                 var model =  meetingConnector.GetMeetingById(meeting);
+                if (model.Value.Taken)
+                    return RedirectToAction("Meetings", "Home");
+
                 model.Value.Taken = true;
                 meetingConnector.UpsertMeeting(model.Value);
                 meetingConnector.UpsertMeetingForUser(model.Value,
