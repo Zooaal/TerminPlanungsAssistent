@@ -13,7 +13,7 @@
  - [x]  1. Entwickeln Sie eine Webanwendung auf Basis eines vorhandenen Webframeworks
         Ihrer gewählten Programmiersprache (bspw. ASP.NET MVC, Rails.js, CakePHP,
         Django, o.ä.)
-- [ ]   2. Verbinden Sie eine Datenbank via einer ORM Komponente (bspw. Entity Framework,
+- [x]   2. Verbinden Sie eine Datenbank via einer ORM Komponente (bspw. Entity Framework,
         SQLAlchemy, Sequelize, o.ä.) und Implementieren Sie mindestens einmal die Fälle
         „Insert, Update, Delete, Select“
 
