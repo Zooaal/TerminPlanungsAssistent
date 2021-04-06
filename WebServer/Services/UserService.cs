@@ -35,7 +35,7 @@ namespace WebServer.Services
                 audience: "http://localhost:5001/",
                 claims: GetUserClaims(userAccess.Value),
                 notBefore: new DateTimeOffset(DateTime.Now).DateTime,
-                expires: new DateTimeOffset(DateTime.Now.AddDays(1)).DateTime,
+                expires: new DateTimeOffset(DateTime.Now.AddHours(1)).DateTime,
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             );
             var token = new JwtSecurityTokenHandler().WriteToken(JWToken);
