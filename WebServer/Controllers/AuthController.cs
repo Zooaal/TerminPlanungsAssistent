@@ -59,6 +59,7 @@ namespace WebServer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Register(UserModel CurrentUser)
         {
             if (CurrentUser.Password != CurrentUser.ConfirmPassword)

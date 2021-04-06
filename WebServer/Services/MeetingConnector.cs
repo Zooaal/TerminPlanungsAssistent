@@ -72,5 +72,29 @@ namespace WebServer.Services
                 return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
             }
         }
+        public LogikReturn<MeetingModel> InsertMeeting(MeetingModel model)
+        {
+            try
+            {
+                _db.InsertRecord<MeetingModel>("Meetings", model);
+                return new LogikReturn<MeetingModel>(ReturnStatus.Ok, null);
+            }
+            catch (Exception e)
+            {
+                return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
+            }
+        }
+        public LogikReturn<MeetingModel> UpsertMeeting(MeetingModel model)
+        {
+            try
+            {
+                _db.UpsertRecord<MeetingModel>("Meetings", model.ID, model);
+                return new LogikReturn<MeetingModel>(ReturnStatus.Ok, null);
+            }
+            catch (Exception e)
+            {
+                return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
+            }
+        }
     }
 }

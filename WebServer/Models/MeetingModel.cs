@@ -10,8 +10,9 @@ namespace WebServer.Models
     {
         [BsonId]
         public Guid ID { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime DateTime { get; set; }
-        public TimeSpan TimeSpan { get; set; }
+        public double TimeSpan { get; set; }
         public Boolean Taken { get; set; }
     }
 }

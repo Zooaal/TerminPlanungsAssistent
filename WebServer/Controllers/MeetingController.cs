@@ -1,17 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebServer.Models;
 using WebServer.Services;
 
 namespace WebServer.Controllers
 {
-    [ApiController]
-    [Route("MeetingController/")]
+
     public class MeetingController : Controller
     {
         private readonly MeetingConnector meetingConnector;
@@ -21,7 +14,6 @@ namespace WebServer.Controllers
         }
         // GET: MeetingController/AllMeetings
         [HttpGet]
-        [Route("All")]
         public ActionResult AllMeetings()
         {
             var meetings = meetingConnector.GetAllMeetings();
@@ -34,18 +26,15 @@ namespace WebServer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(MeetingModel meeting)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            meetingConnector.InsertMeeting(meeting);
+            var meetings = meetingConnector.GetAllMeetings().Value;
+            ViewData["meetings"] = meetings;
+            return View("~/Views/Home/AdminMeetings.cshtml");
         }
 
         // POST: MeetingController/Edit
         [HttpPost]
+        [Authorized]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(MeetingModel meeting)
         {
@@ -56,6 +45,7 @@ namespace WebServer.Controllers
 
         // POST: MeetingController/Delete
         [HttpPost]
+        [Authorized]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(MeetingModel meeting)
         {
@@ -65,6 +55,24 @@ namespace WebServer.Controllers
                 var meetings = meetingConnector.GetAllMeetings().Value;
                 ViewData["meetings"] = meetings;
                 return View("~/Views/Home/AdminMeetings.cshtml");
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
+        // POST: MeetingController/Select
+        [HttpPost]
+        [Authorized]
+        [ValidateAntiForgeryToken]
+        public ActionResult Select(MeetingModel meeting)
+        {
+            try
+            {
+                var result = meetingConnector.UpsertMeeting(meeting);
+                var meetings = meetingConnector.GetAllMeetings().Value;
+                ViewData["meetings"] = meetings;
+                return View("~/Views/Home/Meetings.cshtml");
             }
             catch
             {

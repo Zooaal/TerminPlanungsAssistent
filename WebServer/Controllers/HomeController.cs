@@ -50,8 +50,10 @@ namespace WebServer.Controllers
                 meetings = result.FindAll(m => m.Taken);
             }
             //ViewData["meetings"] = meetings;
-            DateTime date = DateTime.Now;
-            meetings.Add(new MeetingModel() { ID = new Guid(), DateTime = date, TimeSpan = new TimeSpan(), Taken = false});
+            //DateTime date = DateTime.Now;
+            //meetings.Add(new MeetingModel() { ID = new Guid(), DateTime = date, TimeSpan = new TimeSpan(), Taken = false});
+            var allMeetings = meetingConnector.GetAllMeetings().Value;
+            ViewData["allMeetings"] = allMeetings;
             ViewData["meetings"] = meetings;
             return View();
         }
