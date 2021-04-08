@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Models;
@@ -6,7 +7,8 @@ using WebServer.Services;
 
 namespace WebServer.Controllers
 {
-
+    [ApiController]
+    [Route("MeetingController/")]
     public class MeetingController : Controller
     {
         private readonly MeetingConnector meetingConnector;
@@ -16,6 +18,7 @@ namespace WebServer.Controllers
         }
         // GET: MeetingController/AllMeetings
         [HttpGet]
+        [Route("All")]
         public ActionResult AllMeetings()
         {
             var meetings = meetingConnector.GetAllMeetings();
@@ -26,6 +29,7 @@ namespace WebServer.Controllers
         [HttpPost]
         [Authorized]
         [ValidateAntiForgeryToken]
+        [Route("Create")]
         public ActionResult Create(MeetingModel meeting)
         {
             meetingConnector.InsertMeeting(meeting);
@@ -37,17 +41,19 @@ namespace WebServer.Controllers
         [HttpPost]
         [Authorized]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(MeetingModel meeting)
+        [Route("Edit/{id}")]
+        public ActionResult Edit(Guid id)
         {
             // Return Edit View with Meeting
-            var currentMeeting = meetingConnector.GetMeetingById(meeting).Value;
+            var currentMeeting = meetingConnector.GetMeetingById(new MeetingModel(){ID = id}).Value;
             ViewData["meeting"] = currentMeeting;
             return View("~/Views/Home/ModifyMeeting.cshtml");
         }
-        // POST: MeetingController/Edit
+        // POST: MeetingController/Edit/{id}
         [HttpPost]
         [Authorized]
         [ValidateAntiForgeryToken]
+        [Route("EditMeeting")]
         public ActionResult EditMeeting(MeetingModel meeting)
         {
             meetingConnector.UpsertMeeting(meeting);
@@ -58,11 +64,12 @@ namespace WebServer.Controllers
         [HttpPost]
         [Authorized]
         [ValidateAntiForgeryToken]
-        public ActionResult CancelMeeting(MeetingModel meeting)
+        [Route("CancelMeeting/{id}")]
+        public ActionResult CancelMeeting(Guid id)
         {
             try
             {
-                var model = meetingConnector.GetMeetingById(meeting);
+                var model = meetingConnector.GetMeetingById(new MeetingModel(){ID = id});
                 model.Value.Taken = false;
                 meetingConnector.UpsertMeeting(model.Value);
                 meetingConnector.CancelMeetingForUser(model.Value,
@@ -79,11 +86,12 @@ namespace WebServer.Controllers
         [HttpPost]
         [Authorized]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(MeetingModel meeting)
+        [Route("Delete/{id}")]
+        public ActionResult Delete(Guid id)
         {
             try
             {
-                meetingConnector.DeleteMeetingById(meeting);
+                meetingConnector.DeleteMeetingById(new MeetingModel(){ID = id});
                 return RedirectToAction("AdminMeetings", "Home");
                 return View("~/Views/Home/AdminMeetings.cshtml");
             }
@@ -96,11 +104,12 @@ namespace WebServer.Controllers
         [HttpPost]
         [Authorized]
         [ValidateAntiForgeryToken]
-        public ActionResult Select(MeetingModel meeting)
+        [Route("Select/{id}")]
+        public ActionResult Select(Guid id)
         {
             try
             {
-                var model =  meetingConnector.GetMeetingById(meeting);
+                var model =  meetingConnector.GetMeetingById(new MeetingModel(){ID = id});
                 if (model.Value.Taken)
                     return RedirectToAction("Meetings", "Home");
 

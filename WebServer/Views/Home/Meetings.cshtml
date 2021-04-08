@@ -50,7 +50,7 @@
                         {
                             <form method="post">
                                 <input type="hidden" asp-for="ID" value="@item.ID" />
-                                <button type="submit" asp-controller="Meeting" asp-action="CancelMeeting" class="btn btn-primary btn-block">Absagen</button>
+                                <button type="submit" asp-controller="Meeting" asp-action="CancelMeeting" asp-route-id="@item.ID" class="btn btn-primary btn-block">Absagen</button>
                             </form>
                         }
                     }
@@ -100,7 +100,7 @@
                             {
                                 <form method="post">
                                     <input type="hidden" asp-for="ID" value="@item.ID" />
-                                    <button type="submit" asp-controller="Meeting" asp-action="Select" class="btn btn-primary btn-block">Buchen</button>
+                                    <button type="submit" asp-controller="Meeting" asp-action="Select" asp-route-id="@item.ID" class="btn btn-primary btn-block">Buchen</button>
                                 </form>
                             }
                         }
