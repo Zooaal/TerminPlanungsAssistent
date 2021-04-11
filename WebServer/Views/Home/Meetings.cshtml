@@ -2,148 +2,165 @@
 @using WebServer.Services
 @model WebServer.Models.MeetingModel
 @{
-    ViewData["Title"] = "Meine Termine";
+    ViewData["Title"] = "Gebuchte Termine";
     List<MeetingModel> meetings = ViewData["meetings"] as List<MeetingModel>;
     List<MeetingModel> allMeetings = ViewData["allMeetings"] as List<MeetingModel>;
     int count = 0;
 }
-<h1>@ViewData["Title"]</h1>
+
 
 <meta charset='utf-8' />
 <link href="~/fullcalendar/main.css" rel='stylesheet' />
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Datum</th>
-        <th scope="col">Uhrzeit</th>
-        <th scope="col">Zeitspanne</th>
-        <th scope="col">Gebucht</th>
-        <th scope="col">Optionen</th>
-    </tr>
-    </thead>
-    <tbody>
-    @{
-        foreach (var item in meetings)
-        {
-            count++;
-            <tr>
-                <th scope="row">@count</th>
-                <td>@{ @item.DateTime.Date.ToShortDateString();}</td>
-                <td>@{ @item.DateTime.ToShortTimeString();}</td>
-                <td>@item.TimeSpan Stunden</td>
+<div class="embed-responsive-16by9">
+    <div class="table-responsive">
+        <table class="table table-borderless">
+            <div>
                 <td>
-                    @{
-                        if (item.Taken)
-                        {
-                            <p>Gebucht</p>
-                        }
-                        else
-                        {
-                            <p>Frei</p>
-                        }
+                    <h2>@ViewData["Title"]</h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Datum</th>
+                                <th scope="col">Uhrzeit</th>
+                                <th scope="col">Zeitspanne</th>
+                                <th scope="col">Gebucht</th>
+                                <th scope="col">Optionen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                    foreach (var item in meetings)
+                    {
+                        count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@{  @item.DateTime.Date.ToShortDateString();}</td>
+                                    <td>@{  @item.DateTime.ToShortTimeString();}</td>
+                                    <td>@item.TimeSpan Stunden</td>
+                                    <td>
+                                        @{
+                                    if (item.Taken)
+                                    {
+                                            <p>Gebucht</p>
+                                    }
+                                    else
+                                    {
+                                            <p>Frei</p>
+                                    }
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                    if (item.Taken && !User.HasClaim(Roles.ADMIN, Roles.ADMIN))
+                                    {
+                                            <form method="post">
+                                                <input type="hidden" asp-for="ID" value="@item.ID" />
+                                                <button type="submit" asp-controller="Meeting" asp-action="CancelMeeting" asp-route-id="@item.ID" class="btn btn-primary btn-block">Absagen</button>
+                                            </form>
+                                    }
+                                        }
+                                    </td>
+                                </tr>
                     }
+                            }
+                        </tbody>
+                    </table>
                 </td>
-                <td>
-                    @{
-                        if (item.Taken && !User.HasClaim(Roles.ADMIN, Roles.ADMIN))
-                        {
-                            <form method="post">
-                                <input type="hidden" asp-for="ID" value="@item.ID" />
-                                <button type="submit" asp-controller="Meeting" asp-action="CancelMeeting" asp-route-id="@item.ID" class="btn btn-primary btn-block">Absagen</button>
-                            </form>
-                        }
-                    }
-                </td>
-            </tr>
-        }
-    }
-    </tbody>
-</table>
-<h1>Verfügbare Termine</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Datum</th>
-            <th scope="col">Uhrzeit</th>
-            <th scope="col">Zeitspanne</th>
-            <th scope="col">Gebucht</th>
-            <th scope="col">Optionen</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            foreach (var item in allMeetings)
-            {
-                count++;
-                <tr>
-                    <th scope="row">@count</th>
-                    <td>@{ @item.DateTime.Date.ToShortDateString();}</td>
-                    <td>@{ @item.DateTime.ToShortTimeString();}</td>
-                    <td>@item.TimeSpan Stunden</td>
-                    <td>
-                        @{
-                            if (item.Taken)
-                            {
-                                <p>Gebucht</p>
-                            }
-                            else
-                            {
-                                <p>Frei</p>
-                            }
-                        }
-                    </td>
-                    <td>
-                        @{
-                            if (!item.Taken && !User.HasClaim(Roles.ADMIN, Roles.ADMIN))
-                            {
-                                <form method="post">
-                                    <input type="hidden" asp-for="ID" value="@item.ID" />
-                                    <button type="submit" asp-controller="Meeting" asp-action="Select" asp-route-id="@item.ID" class="btn btn-primary btn-block">Buchen</button>
-                                </form>
-                            }
-                        }
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
-<h1>Kalender</h1>
-<div id='calendar'></div>
-@section Scripts
-{
-    <script src="~/fullcalendar/main.js"></script>
-    <script src="~/fullcalendar/locales/de.js"></script>
-    <script>
-        /*var eventArr = [];
-        var eventtable = document.getElementById("table");
-        var trElement = eventtable.getElementsByTagName("tr");
-        for (var tr of trElement) {
-            var tdElement = tr.getElementsByTagName("td");
-            var eventObj = {
-                id: tdElement[0].innerText,
-                title: tdElement[1].innerText,
-                start: tdElement[1].innerText
-            }
-            eventArr.push(eventObj);
-        }*/
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                //themeSystem: 'bootstrap',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,listWeek'
-                },
-                locale: 'de',
-                //events: eventArr
-            });
-            calendar.render();
-        });
-    </script>
-}
+            </div>
 
+            <div>
+                <td>
+                    <h2>Verfügbare Termine</h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Datum</th>
+                                <th scope="col">Uhrzeit</th>
+                                <th scope="col">Zeitspanne</th>
+                                <th scope="col">Gebucht</th>
+                                <th scope="col">Optionen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                    foreach (var item in allMeetings)
+                    {
+                        count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@{  @item.DateTime.Date.ToShortDateString();}</td>
+                                    <td>@{  @item.DateTime.ToShortTimeString();}</td>
+                                    <td>@item.TimeSpan Stunden</td>
+                                    <td>
+                                        @{
+                                    if (item.Taken)
+                                    {
+                                            <p>Gebucht</p>
+                                    }
+                                    else
+                                    {
+                                            <p>Frei</p>
+                                    }
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                    if (!item.Taken && !User.HasClaim(Roles.ADMIN, Roles.ADMIN))
+                                    {
+                                            <form method="post">
+                                                <input type="hidden" asp-for="ID" value="@item.ID" />
+                                                <button type="submit" asp-controller="Meeting" asp-action="Select" asp-route-id="@item.ID" class="btn btn-primary btn-block">Buchen</button>
+                                            </form>
+                                    }
+                                        }
+                                    </td>
+                                </tr>
+                    }
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </div>
+        </table>
+    </div>
+
+
+    <h1>Kalender</h1>
+    <div id='calendar'></div>
+    @section Scripts
+    {
+        <script src="~/fullcalendar/main.js"></script>
+        <script src="~/fullcalendar/locales/de.js"></script>
+        <script>
+            /*var eventArr = [];
+            var eventtable = document.getElementById("table");
+            var trElement = eventtable.getElementsByTagName("tr");
+            for (var tr of trElement) {
+                var tdElement = tr.getElementsByTagName("td");
+                var eventObj = {
+                    id: tdElement[0].innerText,
+                    title: tdElement[1].innerText,
+                    start: tdElement[1].innerText
+                }
+                eventArr.push(eventObj);
+            }*/
+            document.addEventListener('DOMContentLoaded', function () {
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    //themeSystem: 'bootstrap',
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,listWeek'
+                    },
+                    locale: 'de',
+                    //events: eventArr
+                });
+                calendar.render();
+            });
+        </script>
+    }
+</div>

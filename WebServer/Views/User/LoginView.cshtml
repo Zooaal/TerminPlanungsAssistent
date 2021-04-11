@@ -16,29 +16,29 @@
     }
 }
 
-<div class="col col-md-10 offset-md-1">
-    <section>
-        <form method="post">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input asp-for="Email" placeholder="E-mail / Benutzername" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
+<section>
+    <form method="post">
+        <div>
+            <div>
+                <div>
+                    <input asp-for="Email" placeholder="E-mail / Benutzername" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="password" asp-for="Password" placeholder="Passwort" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    <input type="password" asp-for="Password" placeholder="Passwort" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
             </div>
+        </div>
+        <div>
             <button type="submit" asp-controller="Auth" asp-action="Login" class="btn btn-primary btn-block">Anmelden</button>
-        </form>
-    </section>
-</div>
+        </div>
+    </form>
+</section>
 
 @section Scripts {
     <partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
