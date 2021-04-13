@@ -5,7 +5,7 @@
     @if (User.Identity.IsAuthenticated)
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Manage/Index" title="Manage">Hallo @User.Claims.First().Value</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ManageUserView" title="Manage">Hallo @User.Claims.First().Value</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>

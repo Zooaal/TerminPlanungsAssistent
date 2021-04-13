@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -32,6 +33,14 @@ namespace WebServer.Controllers
         public IActionResult RegisterView()
         {
             return View("~/Views/User/RegisterView.cshtml");
+        }
+        [Authorized]
+        public IActionResult ManageUserView()
+        {
+            var loginConnector = new LoginConnector();
+            var user = loginConnector.Find(User.Claims.First(c => c.Type == ClaimTypes.Email).Value).Value;
+            ViewData["user"] = user;
+            return View("~/Views/Home/ManageUser.cshtml");
         }
         [Authorized]
         public IActionResult Meetings()

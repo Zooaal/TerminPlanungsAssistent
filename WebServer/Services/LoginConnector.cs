@@ -91,5 +91,20 @@ namespace WebServer.Services
                 return new LogikReturn<UserModel>(ReturnStatus.DbError, null);
             }
         }
+
+        public LogikReturn<UserModel> UpsertUser(UserModel model)
+        {
+            try
+            {
+                model.Password = BC.HashPassword(model.Password);
+                model.ConfirmPassword = BC.HashPassword(model.ConfirmPassword);
+                _db.UpsertRecord<UserModel>("Users", model.Id, model);
+                return new LogikReturn<UserModel>(ReturnStatus.Ok, null);
+            }
+            catch (Exception e)
+            {
+                return new LogikReturn<UserModel>(ReturnStatus.DbError, null);
+            }
+        }
     }
 }

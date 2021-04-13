@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using WebServer.Models;
 using WebServer.Services;
 
 namespace WebServer.Controllers
 {
-    [ApiController]
     [Route("MeetingController/")]
     public class MeetingController : Controller
     {
@@ -16,10 +16,19 @@ namespace WebServer.Controllers
         {
             meetingConnector = new MeetingConnector();
         }
-        // GET: MeetingController/AllMeetings
+        // GET: MeetingController/All
         [HttpGet]
         [Route("All")]
         public ActionResult AllMeetings()
+        {
+            var meetings = meetingConnector.GetAllMeetings();
+            return Ok(meetings.Value);
+        }
+        // GET: MeetingController/AllAuth
+        [HttpGet]
+        [Authorized]
+        [Route("AllAuth")]
+        public ActionResult AllAuthMeetings()
         {
             var meetings = meetingConnector.GetAllMeetings();
             return Ok(meetings.Value);
@@ -49,7 +58,7 @@ namespace WebServer.Controllers
             ViewData["meeting"] = currentMeeting;
             return View("~/Views/Home/ModifyMeeting.cshtml");
         }
-        // POST: MeetingController/Edit/{id}
+        // POST: MeetingController/EditMeeting/{meeting}
         [HttpPost]
         [Authorized]
         [ValidateAntiForgeryToken]
@@ -125,5 +134,46 @@ namespace WebServer.Controllers
                 return View("Error");
             }
         }
+        //Region for Postman Requests
+        #region Postman
+        // POST: MeetingController/CreateMeeting
+        [HttpPost]
+        [Authorized]
+        [Route("CreateMeeting")]
+        public ActionResult CreateMeeting([FromBody]MeetingModel meeting)
+        {
+            try
+            {
+                meetingConnector.InsertMeeting(meeting);
+                return Ok("Meeting: " + meeting.ToJson() + " erstellt");
+            }
+            catch
+            {
+                return BadRequest("Db Error");
+            }
+        }
+
+        // POST: MeetingController/DeleteMeeting
+        [HttpPost]
+        [Authorized]
+        [Route("DeleteMeeting")]
+        public ActionResult DeleteMeeting([FromQuery]Guid id)
+        {
+            try
+            {
+                if (meetingConnector.GetMeetingById(new MeetingModel(){ID = id}).Value.Taken == true)
+                {
+                    return BadRequest("Meeting ist schon gebucht");
+                }
+                meetingConnector.DeleteMeetingById(new MeetingModel() { ID = id });
+                return Ok("Meeting mit Id: " + id.ToJson() + " gelöscht");
+            }
+            catch
+            {
+                return BadRequest("Db Error");
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,5 +1,5 @@
 ﻿@using Microsoft.CodeAnalysis
-@model WebServer.Models.MeetingModel
+@model MeetingModel
 @{
     MeetingModel meeting = ViewData["meeting"] as MeetingModel;
     string date = meeting.DateTime.ToString("yyyy-MM-ddTHH:mm");
