@@ -136,6 +136,22 @@ namespace WebServer.Controllers
         }
         //Region for Postman Requests
         #region Postman
+        // POST: MeetingController/UpdateMeeting
+        [HttpPost]
+        [Authorized]
+        [Route("UpdateMeeting")]
+        public ActionResult UpdateMeeting([FromBody] MeetingModel meeting)
+        {
+            try
+            {
+                meetingConnector.UpsertMeeting(meeting);
+                return Ok("Meeting: " + meeting.ToJson() + " updatet");
+            }
+            catch
+            {
+                return BadRequest("Db Error");
+            }
+        }
         // POST: MeetingController/CreateMeeting
         [HttpPost]
         [Authorized]
