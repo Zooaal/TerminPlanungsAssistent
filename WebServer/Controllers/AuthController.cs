@@ -102,6 +102,8 @@ namespace WebServer.Controllers
             if (userModel.Password != userModel.ConfirmPassword)
             {
                 TempData["Error"] = "Ungleiche Passwörter";
+                var currentUser = _loginConnector.Find(User.Claims.First(c => c.Type == ClaimTypes.Email).Value).Value;
+                ViewData["user"] = currentUser;
                 return View("~/Views/Home/ManageUser.cshtml");
             }
             var user = _loginConnector.Find(User.Claims.First(c => c.Type == ClaimTypes.Email).Value).Value;
