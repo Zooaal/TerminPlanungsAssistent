@@ -24,15 +24,6 @@ namespace WebServer.Controllers
             var meetings = meetingConnector.GetAllMeetings();
             return Ok(meetings.Value);
         }
-        // GET: MeetingController/AllAuth
-        [HttpGet]
-        [Authorized]
-        [Route("AllAuth")]
-        public ActionResult AllAuthMeetings()
-        {
-            var meetings = meetingConnector.GetAllMeetings();
-            return Ok(meetings.Value);
-        }
 
         // POST: MeetingController/Create
         [HttpPost]
@@ -138,7 +129,7 @@ namespace WebServer.Controllers
         #region Postman
         // POST: MeetingController/UpdateMeeting
         [HttpPost]
-        [Authorized]
+        [AuthorizePostman]
         [Route("UpdateMeeting")]
         public ActionResult UpdateMeeting([FromBody] MeetingModel meeting)
         {
@@ -154,7 +145,7 @@ namespace WebServer.Controllers
         }
         // POST: MeetingController/CreateMeeting
         [HttpPost]
-        [Authorized]
+        [AuthorizePostman]
         [Route("CreateMeeting")]
         public ActionResult CreateMeeting([FromBody]MeetingModel meeting)
         {
@@ -171,7 +162,7 @@ namespace WebServer.Controllers
 
         // POST: MeetingController/DeleteMeeting
         [HttpPost]
-        [Authorized]
+        [AuthorizePostman]
         [Route("DeleteMeeting")]
         public ActionResult DeleteMeeting([FromQuery]Guid id)
         {
@@ -190,6 +181,15 @@ namespace WebServer.Controllers
             }
         }
 
+        // GET: MeetingController/AllAuth
+        [HttpGet]
+        [AuthorizePostman]
+        [Route("AllAuth")]
+        public ActionResult AllAuthMeetings()
+        {
+            var meetings = meetingConnector.GetAllMeetings();
+            return Ok(meetings.Value);
+        }
         #endregion
     }
 }
