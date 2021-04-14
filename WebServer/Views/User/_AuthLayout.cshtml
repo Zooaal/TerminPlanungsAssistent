@@ -4,9 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
+<div class="card">
     <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
+        <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="LoginView">Anmelden</a>
             </li>
@@ -15,12 +15,8 @@
             </li>
         </ul>
     </div>
-    <div>
-        <div>
-            <div class="col-md-12">
-                @RenderBody()
-            </div>
-        </div>
+    <div class="card-body">
+        @RenderBody()
     </div>
 </div>
 

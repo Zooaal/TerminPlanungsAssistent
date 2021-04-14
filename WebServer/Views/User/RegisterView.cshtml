@@ -9,46 +9,41 @@
     }
 }
 
-<section>
+<div class="card-body">
     <form method="post">
-        <div>
-            <div>
-                <div>
-                    <label>Benutzername</label>
-                    <input asp-for="UserName" class="form-control" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <label>Email</label>
-                    <input type="email" asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-            </div>
+        <div class="row">
+            <h6>Benutzername:</h6>
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
 
-        <div>
-            <div>
-                <div>
-                    <label>Passwort</label>
-                    <input type="password" asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <label>Passwort Wiederholen</label>
-                    <input type="password" asp-for="ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-            </div>
+        <div class="row">
+            <h6>E-Mail:</h6>
+            <input type="email" asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
-        <div>
-        <button type="submit" asp-controller="Auth" asp-action="Register" class="btn btn-primary btn-block">Registrieren</button>
+
+
+        <div class="row">
+            <h6>Passwort:</h6>
+            <input type="password" asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <h6>Passwort wiederholen:</h6>
+            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <button type="submit" asp-controller="Auth" asp-action="Register" class="btn btn-primary btn-block">Registrieren</button>
         </div>
     </form>
-</section>
+</div>
+
 
 @section Scripts {
     <partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
