@@ -5,83 +5,105 @@
     List<MeetingModel> meetings = ViewData["meetings"] as List<MeetingModel>;
     int count = 0;
 }
-<h1>@ViewData["Title"]</h1>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Datum</th>
-        <th scope="col">Uhrzeit</th>
-        <th scope="col">Zeitspanne</th>
-        <th scope="col">Gebucht</th>
-        <th scope="col">Optionen</th>
-    </tr>
-    </thead>
-    <tbody>
-    @{
-        foreach (var item in meetings)
-        {
-            count++;
+
+<div class="card">
+    <div class="card-header">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
             <tr>
-                <th scope="row">@count</th>
-                <td>@{ @item.DateTime.Date.ToShortDateString();}</td>
-                <td>@{ @item.DateTime.ToShortTimeString();}</td>
-                <td>@item.TimeSpan Stunden</td>
-                <td>@{
-                        if (item.Taken)
-                        {
-                            <p>Gebucht</p>
-                        }
-                        else
-                        {
-                            <p>Frei</p>
-                        }
-                    }
-                </td>
-                <td>
-                    @{
-                        if (!item.Taken)
-                        {
-                            <form method="post">
-                                <input type="hidden" asp-for="ID" value="@item.ID"/>
-                                <button type="submit"asp-controller="Meeting" asp-action="Edit" asp-route-id="@item.ID" class="btn btn-primary">Ändern</button>
-                                <button type="submit" asp-controller="Meeting" asp-action="Delete" asp-route-id="@item.ID" class="btn btn-primary">Löschen</button>
-                            </form>
-                        }
-                    }
-                </td>
+                <th scope="col">#</th>
+                <th scope="col">Datum</th>
+                <th scope="col">Uhrzeit</th>
+                <th scope="col">Zeitspanne</th>
+                <th scope="col">Gebucht</th>
+                <th scope="col">Optionen</th>
             </tr>
-        }
-    }
-    </tbody>
-</table>
-<h1>Termin erstellen</h1>
-<div class="col col-md-10 offset-md-1">
-    <section>
+            </thead>
+            
+            @{
+                foreach (var item in meetings)
+                {
+                    count++;
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>
+                            @{
+                                @item.DateTime.Date.ToShortDateString()
+                                ;}
+                        </td>
+                        <td>
+                            @{
+                                @item.DateTime.ToShortTimeString()
+                                ;}
+                        </td>
+                        <td>@item.TimeSpan Stunden</td>
+                        <td>
+                            @{
+                                if (item.Taken)
+                                {
+                                    <p>Gebucht</p>
+                                }
+                                else
+                                {
+                                    <p>Frei</p>
+                                }
+                            }
+                        </td>
+                        <td>
+                            @{
+                                if (!item.Taken)
+                                {
+                                    <form method="post">
+                                        <input type="hidden" asp-for="ID" value="@item.ID" />
+                                        <button type="submit" asp-controller="Meeting" asp-action="Edit" asp-route-id="@item.ID" class="btn btn-primary">Ändern</button>
+                                        <button type="submit" asp-controller="Meeting" asp-action="Delete" asp-route-id="@item.ID" class="btn btn-primary">Löschen</button>
+                                    </form>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+
+<br/>
+
+<div class="card">
+    <div class="card-header">
+        <h1>Termin erstellen</h1>
+    </div>
+    <div class="card-body">
         <form method="post">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Datum/Uhrzeit</label>
-                        <input type="datetime-local" asp-for="DateTime" class="form-control" />
-                    </div>
+                <div class="col-sm">
+                    <h5>Datum/Uhrzeit:</h5>
+                    <input type="datetime-local" asp-for="DateTime" class="form-control" />
+                </div>
+
+                <div class="form-group col-sm">
+                    <h5>Zeitspanne:</h5>
+                    <select asp-for="TimeSpan" class="col-sm form-control">
+                        <option value="0.5">0.5 Stunden</option>
+                        <option value="1.0">1.0 Stunden</option>
+                        <option value="1.5">1.5 Stunden</option>
+                        <option value="2.0">2.0 Stunden</option>
+                        <option value="2.5">2.5 Stunden</option>
+                        <option value="3.0">3.0 Stunden</option>
+                        <option value="3.5">3.5 Stunden</option>
+                        <option value="4.0">4.0 Stunden</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Zeitspanne:</label>
-                        <select asp-for="TimeSpan">
-                            <option value="0.5">0.5</option>
-                            <option value="1.0">1.0</option>
-                            <option value="1.5">1.5</option>
-                            <option value="2.0">2.0</option>
-                        </select>
-                        <label>Stunden</label>
-                    </div>
+                <div class="col-sm">
+                    <button type="submit" asp-controller="Meeting" asp-action="Create" class="btn btn-primary btn-block">Erstellen</button>
                 </div>
             </div>
-            <button type="submit" asp-controller="Meeting" asp-action="Create" class="btn btn-primary btn-block">Erstellen</button>
         </form>
-    </section>
+    </div>
 </div>

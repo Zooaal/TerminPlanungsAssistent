@@ -6,35 +6,44 @@
     int i1;
     int i2;
 }
-<h1>Termin ändern</h1>
-<div>
-    <section>
-        <form method="post">
-            <div>
-                <div>
-                    <div class="form-group">
+
+<div class="card">
+    <div class="card-header">
+        <h1>Termin ändern</h1>
+    </div>
+
+    <div class="card-body">
+        <section>
+            <form method="post">
+                <div class="row">
+                    <div class="form-group col-sm">
                         <input type="hidden" asp-for="ID" value="@meeting.ID" />
                         <input type="hidden" asp-for="Taken" value="@meeting.Taken" />
-                        <label>Datum/Uhrzeit</label>
+                        <h5>Datum/Uhrzeit:</h5>
                         <input type="datetime-local" asp-for="DateTime" value="@date" class="form-control" />
                     </div>
                 </div>
-            </div>
-            <div>
-                <div>
-                    <div class="form-group">
-                        <label>Zeitspanne:</label>
-                        <select asp-for="TimeSpan">
-                            <option value="0.5">0.5</option>
-                            <option value="1.0">1.0</option>
-                            <option value="1.5">1.5</option>
-                            <option value="2.0">2.0</option>
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <h5>Zeitspanne:</h5>
+                        <select asp-for="TimeSpan" class="col-sm form-control">
+                            <option value="0.5">0.5 Stunden</option>
+                            <option value="1.0">1.0 Stunden</option>
+                            <option value="1.5">1.5 Stunden</option>
+                            <option value="2.0">2.0 Stunden</option>
+                            <option value="2.5">2.5 Stunden</option>
+                            <option value="3.0">3.0 Stunden</option>
+                            <option value="3.5">3.5 Stunden</option>
+                            <option value="4.0">4.0 Stunden</option>
                         </select>
-                        <label>Stunden</label>
                     </div>
                 </div>
-            </div>
-            <button type="submit" asp-controller="Meeting" asp-action="EditMeeting" class="btn btn-primary btn-block">Ändern</button>
-        </form>
-    </section>
+                <div class="row">
+                    <div class="col-sm">
+                        <button type="submit" asp-controller="Meeting" asp-action="EditMeeting" class="btn btn-primary btn-block">Ändern</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
 </div>
