@@ -45,11 +45,12 @@ namespace WebServer.Services
         private IEnumerable<Claim> GetUserClaims(UserModel user)
         {
             IEnumerable<Claim> claims = new Claim[]
-                    {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(user.AccessLevel, user.AccessLevel)
-                    };
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(user.AccessLevel, user.AccessLevel)
+            };
             return claims;
         }
 

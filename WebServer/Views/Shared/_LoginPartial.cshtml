@@ -1,11 +1,28 @@
-﻿@model WebServer.Models.UserModel
+﻿@using System.Security.Claims
+@using WebServer.Services
+@model WebServer.Models.UserModel
 @{
+    var user = new UserModel() { UserName = "" };
+    try
+    {
+        var idString = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+        Guid id2 = Guid.Parse(idString);
+        LoginConnector loginConnector = new LoginConnector();
+        user = loginConnector.FindById(id2).Value;
+    }
+    catch
+    {
+        user = new UserModel(){UserName = ""};
+    }
 }
 <ul class="navbar-nav">
     @if (User.Identity.IsAuthenticated)
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ManageUserView" title="Manage">Hallo @User.Claims.First().Value</a>
+            <p class="nav-link text-dark" >Hallo @user.UserName</p>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ManageUserView" title="Manage">Profil bearbeiten</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>

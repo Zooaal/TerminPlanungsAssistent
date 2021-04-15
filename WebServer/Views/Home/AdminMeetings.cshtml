@@ -57,9 +57,9 @@
                                 if (!item.Taken)
                                 {
                                     <form method="post">
-                                        <input type="hidden" asp-for="ID" value="@item.ID" />
-                                        <button type="submit" asp-controller="Meeting" asp-action="Edit" asp-route-id="@item.ID" class="btn btn-primary">Ändern</button>
-                                        <button type="submit" asp-controller="Meeting" asp-action="Delete" asp-route-id="@item.ID" class="btn btn-primary">Löschen</button>
+                                        <input type="hidden" asp-for="Id" value="@item.Id" />
+                                        <button type="submit" asp-controller="Meeting" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Ändern</button>
+                                        <button type="submit" asp-controller="Meeting" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Löschen</button>
                                     </form>
                                 }
                             }

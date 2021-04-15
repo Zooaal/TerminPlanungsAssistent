@@ -102,11 +102,15 @@ namespace WebServer.Controllers
             if (userModel.Password != userModel.ConfirmPassword)
             {
                 TempData["Error"] = "Ungleiche Passwörter";
-                var currentUser = _loginConnector.Find(User.Claims.First(c => c.Type == ClaimTypes.Email).Value).Value;
+                var idString = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+                Guid id = Guid.Parse(idString);
+                var currentUser = _loginConnector.FindById(id).Value;
                 ViewData["user"] = currentUser;
                 return View("~/Views/Home/ManageUser.cshtml");
             }
-            var user = _loginConnector.Find(User.Claims.First(c => c.Type == ClaimTypes.Email).Value).Value;
+            var idString2 = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            Guid id2 = Guid.Parse(idString2);
+            var user = _loginConnector.FindById(id2).Value;
             userModel.Meetings = user.Meetings;
             _loginConnector.UpsertUser(userModel);
             return RedirectToAction("Index", "Home");

@@ -9,7 +9,7 @@ namespace WebServer.Models
     public class MeetingModel
     {
         [BsonId]
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime DateTime { get; set; }
         public double TimeSpan { get; set; }

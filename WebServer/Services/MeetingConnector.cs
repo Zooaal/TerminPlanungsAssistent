@@ -66,7 +66,7 @@ namespace WebServer.Services
         {
             try
             {
-                var meeting = _db.LoadRecordById<MeetingModel>("Meetings", model.ID);
+                var meeting = _db.LoadRecordById<MeetingModel>("Meetings", model.Id);
                 return new LogikReturn<MeetingModel>(ReturnStatus.Ok, meeting);
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace WebServer.Services
         {
             try
             {
-                _db.DeleteRecord<MeetingModel>("Meetings", model.ID);
+                _db.DeleteRecord<MeetingModel>("Meetings", model.Id);
                 return new LogikReturn<MeetingModel>(ReturnStatus.Ok, null);
             }
             catch (Exception e)
@@ -102,7 +102,7 @@ namespace WebServer.Services
         {
             try
             {
-                _db.UpsertRecord<MeetingModel>("Meetings", model.ID, model);
+                _db.UpsertRecord<MeetingModel>("Meetings", model.Id, model);
                 return new LogikReturn<MeetingModel>(ReturnStatus.Ok, null);
             }
             catch (Exception e)
@@ -115,7 +115,7 @@ namespace WebServer.Services
             try
             {
                 var currentUser = _db.LoadRecordByUserName<UserModel>("Users", user.UserName);
-                currentUser.Meetings.Add(model.ID);
+                currentUser.Meetings.Add(model.Id);
                 _db.UpsertRecord<UserModel>("Users", currentUser.Id, currentUser);
                 return new LogikReturn<MeetingModel>(ReturnStatus.Ok, null);
             }
@@ -129,7 +129,7 @@ namespace WebServer.Services
             try
             {
                 var currentUser = _db.LoadRecordByUserName<UserModel>("Users", user.UserName);
-                currentUser.Meetings.Remove(model.ID);
+                currentUser.Meetings.Remove(model.Id);
                 _db.UpsertRecord<UserModel>("Users", currentUser.Id, currentUser);
                 return new LogikReturn<MeetingModel>(ReturnStatus.Ok, null);
             }

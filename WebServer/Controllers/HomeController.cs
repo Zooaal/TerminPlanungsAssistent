@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using WebServer.Models;
 using WebServer.Services;
 using System.Security.Claims;
+using BC = BCrypt.Net.BCrypt;
 
 namespace WebServer.Controllers
 {
@@ -38,7 +39,9 @@ namespace WebServer.Controllers
         public IActionResult ManageUserView()
         {
             var loginConnector = new LoginConnector();
-            var user = loginConnector.Find(User.Claims.First(c => c.Type == ClaimTypes.Email).Value).Value;
+            var idString = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            Guid id = Guid.Parse(idString);
+            var user = loginConnector.FindById(id).Value;
             ViewData["user"] = user;
             return View("~/Views/Home/ManageUser.cshtml");
         }
@@ -46,13 +49,17 @@ namespace WebServer.Controllers
         public IActionResult Meetings()
         {
             var meetingConnector = new MeetingConnector();
-            string email = "";
+            var user = new UserModel();
             if (User.Identity.IsAuthenticated)
             {
-                var dict = User.Claims.Where(p => p.Type == ClaimTypes.Email).ToDictionary(p => p.Type, p => p.Value);
-                email = dict.Values.First();
+                var idString = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+                Guid id = Guid.Parse(idString);
+                //var dict = User.Claims.Where(p => p.Type == ClaimTypes.Email).ToDictionary(p => p.Type, p => p.Value);
+                //email = dict.Values.First();
+                var loginConnector = new LoginConnector(); 
+                user = loginConnector.FindById(id).Value;
             }
-            var meetings = meetingConnector.GetUserMeetings(email).Value;
+            var meetings = meetingConnector.GetUserMeetings(user.Email).Value;
             if (User.HasClaim(Roles.ADMIN, Roles.ADMIN))
             {
                 var result = meetingConnector.GetAllMeetings().Value;

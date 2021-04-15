@@ -64,8 +64,8 @@
                                         if (item.Taken && !User.HasClaim(Roles.ADMIN, Roles.ADMIN))
                                         {
                                             <form method="post">
-                                                <input type="hidden" asp-for="ID" value="@item.ID"/>
-                                                <button type="submit" asp-controller="Meeting" asp-action="CancelMeeting" asp-route-id="@item.ID" class="btn btn-primary btn-block">Absagen</button>
+                                                <input type="hidden" asp-for="Id" value="@item.Id"/>
+                                                <button type="submit" asp-controller="Meeting" asp-action="CancelMeeting" asp-route-id="@item.Id" class="btn btn-primary btn-block">Absagen</button>
                                             </form>
                                         }
                                     }
@@ -131,8 +131,8 @@
                                         if (!item.Taken && !User.HasClaim(Roles.ADMIN, Roles.ADMIN))
                                         {
                                             <form method="post">
-                                                <input type="hidden" asp-for="ID" value="@item.ID"/>
-                                                <button type="submit" asp-controller="Meeting" asp-action="Select" asp-route-id="@item.ID" class="btn btn-primary btn-block">Buchen</button>
+                                                <input type="hidden" asp-for="Id" value="@item.Id"/>
+                                                <button type="submit" asp-controller="Meeting" asp-action="Select" asp-route-id="@item.Id" class="btn btn-primary btn-block">Buchen</button>
                                             </form>
                                         }
                                     }

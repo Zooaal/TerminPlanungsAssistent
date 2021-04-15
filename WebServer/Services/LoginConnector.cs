@@ -19,6 +19,26 @@ namespace WebServer.Services
             _db = new MongoCRUD("TerminPlanungsAssistent");
         }
 
+        public LogikReturn<UserModel> FindById(Guid userId)
+        {
+            try
+            {
+                var result = _db.LoadRecordById<UserModel>("Users", userId);
+                if (result != null)
+                {
+                    return new LogikReturn<UserModel>(ReturnStatus.Ok, result);
+                }
+                else
+                {
+                    return new LogikReturn<UserModel>(ReturnStatus.Fail, null);
+                }
+            }
+            catch (Exception e)
+            {
+                return new LogikReturn<UserModel>(ReturnStatus.DbError, null);
+            }
+        }
+
         public LogikReturn<UserModel> Find(string userId)
         {
             try

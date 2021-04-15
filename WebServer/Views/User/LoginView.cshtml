@@ -19,13 +19,13 @@
     <form method="post">
         <div class="row">
             <h6>E-Mail/Benutzername:</h6>
-            <input asp-for="Email" class="form-control" />
+            <input asp-for="Email" class="form-control" required/>
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
         <div class="row">
             <h6>Passwort:</h6>
-            <input type="password" asp-for="Password" class="form-control" />
+            <input type="password" asp-for="Password" class="form-control" required/>
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
