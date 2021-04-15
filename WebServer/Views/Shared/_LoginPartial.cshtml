@@ -15,11 +15,12 @@
         user = new UserModel(){UserName = ""};
     }
 }
+
 <ul class="navbar-nav">
     @if (User.Identity.IsAuthenticated)
     {
         <li class="nav-item">
-            <p class="nav-link text-dark" >Hallo @user.UserName</p>
+            <h5 class="nav-link text-dark">Hallo @user.UserName</h5>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ManageUserView" title="Manage">Profil bearbeiten</a>
