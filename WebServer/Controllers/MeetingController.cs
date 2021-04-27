@@ -131,6 +131,8 @@ namespace WebServer.Controllers
                 return View("Error");
             }
         }
+
+
         //Region for Postman Requests
         #region Postman
         // POST: MeetingController/UpdateMeeting
@@ -166,8 +168,8 @@ namespace WebServer.Controllers
             }
         }
 
-        // POST: MeetingController/DeleteMeeting
-        [HttpPost]
+        // Delete: MeetingController/DeleteMeeting
+        [HttpDelete]
         [AuthorizePostman]
         [Route("DeleteMeeting")]
         public ActionResult DeleteMeeting([FromQuery]Guid id)
