@@ -22,9 +22,12 @@ namespace WebServer.Services
         {
             _claim = claim;
         }
+        // Bei jeder Postman Anfrage wird diese Methode durchgegangen
         public void OnAuthorization(AuthorizationFilterContext context)
         {
+            // Überprüfen auf Authorisierung
             bool isAuthenticated = context.HttpContext.User.Identity.IsAuthenticated;
+            // Wenn nicht Authorisiert Rückgabe eines unauthoriserten Results
             if (!isAuthenticated)
             {
                 context.Result = new UnauthorizedResult();

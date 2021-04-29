@@ -11,17 +11,20 @@ namespace WebServer.Services
     public class MeetingConnector
     {
         private readonly MongoCRUD _db;
+        // Datenbank zugriff eröffnen
         public MeetingConnector()
         {
             _db = new MongoCRUD("TerminPlanungsAssistent");
         }
-
+        // Holen der Meetings eines Benutzers über die email
         public LogikReturn<List<MeetingModel>> GetUserMeetings(string email)
         {
             try
             {
+                // User objekt aus Datenbank holen
                 var user = _db.LoadRecordByEmail<UserModel>("Users", email);
                 List<MeetingModel> meetings = new List<MeetingModel>();
+                // Meetings aus der Datenbank holen
                 foreach (var id in user.Meetings)
                 {
                     meetings.Add(_db.LoadRecordById<MeetingModel>("Meetings", id));
@@ -33,7 +36,7 @@ namespace WebServer.Services
                 return new LogikReturn<List<MeetingModel>>(ReturnStatus.DbError, null);
             }
         }
-
+        // Alle Meetings aus der Datenbank holen
         public LogikReturn<List<MeetingModel>> GetAllMeetings()
         {
             try
@@ -47,6 +50,7 @@ namespace WebServer.Services
                 return new LogikReturn<List<MeetingModel>>(ReturnStatus.DbError, null);
             }
         }
+        // Alle Meetings aus der Datenbank holen bei dennen Taken gleich false
         public LogikReturn<List<MeetingModel>> GetAllNotTakenMeetings()
         {
             try
@@ -61,7 +65,7 @@ namespace WebServer.Services
                 return new LogikReturn<List<MeetingModel>>(ReturnStatus.DbError, null);
             }
         }
-
+        // Ein bestimmtes Meeting anhand der Id aus der Datenbank holen
         public LogikReturn<MeetingModel> GetMeetingById(MeetingModel model)
         {
             try
@@ -74,6 +78,7 @@ namespace WebServer.Services
                 return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
             }
         }
+        // Ein bestimmtes Meeting anhand der Id aus der Datenbank löschen
         public LogikReturn<MeetingModel> DeleteMeetingById(MeetingModel model)
         {
             try
@@ -86,6 +91,7 @@ namespace WebServer.Services
                 return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
             }
         }
+        // Meeting der Datenbank hinzufügen
         public LogikReturn<MeetingModel> InsertMeeting(MeetingModel model)
         {
             try
@@ -98,6 +104,7 @@ namespace WebServer.Services
                 return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
             }
         }
+        // Meeting aus der Datenbank updaten
         public LogikReturn<MeetingModel> UpsertMeeting(MeetingModel model)
         {
             try
@@ -110,6 +117,7 @@ namespace WebServer.Services
                 return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
             }
         }
+        // Die Liste der Meetings eines Useres updaten mit einem neuen Meeting
         public LogikReturn<MeetingModel> UpsertMeetingForUser(MeetingModel model, UserModel user)
         {
             try
@@ -124,6 +132,7 @@ namespace WebServer.Services
                 return new LogikReturn<MeetingModel>(ReturnStatus.DbError, null);
             }
         }
+        // Entfernen eines Meetings aus der Liste des Users
         public LogikReturn<MeetingModel> CancelMeetingForUser(MeetingModel model, UserModel user)
         {
             try

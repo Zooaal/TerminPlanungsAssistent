@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace WebServer.Services
 {
+    // Eigenes Authorize Attribute für die API
     public class AuthorizedAttribute : TypeFilterAttribute
     {
         public AuthorizedAttribute(params string[] claim) : base(typeof(AuthorizedFilter))
@@ -24,9 +25,12 @@ namespace WebServer.Services
         {
             _claim = claim;
         }
+        // Bei jeder Anfrage wird diese Methode durchgegangen
         public void OnAuthorization(AuthorizationFilterContext context)
         {
+            // Überprüfen auf Authorisierung
             bool isAuthenticated = context.HttpContext.User.Identity.IsAuthenticated;
+            // Wenn nicht Authorisiert zurück zur Login Seite
             if (!isAuthenticated)
             { 
                 context.Result = new RedirectResult("~/Home/LoginView");

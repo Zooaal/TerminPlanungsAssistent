@@ -20,6 +20,7 @@ namespace WebServer.Controllers
         private readonly UserService _userService;
         public AuthController(IConfiguration configuration)
         {
+            // Objekt für die User abhandlung
             _userService = new UserService(configuration);
         }
         // GET: AuthController/Logout
@@ -27,9 +28,9 @@ namespace WebServer.Controllers
         [Route("Logout")]
         public IActionResult Logout()
         {
+            // Die momentane Session leeren
             HttpContext.Session.Clear();
             return Redirect("/");
-
         }
         // POST: AuthController/Login
         [HttpPost]
@@ -39,17 +40,19 @@ namespace WebServer.Controllers
         {
             string returnUrl = "/";
             LoginConnector _loginConnector = new LoginConnector();
+            // Verifizierung der User Daten für das Login
             var result = _loginConnector.VerifyLogin(userModel.Email, userModel.Password);
+            // Überprüfen ob der User verifiziert ist
             if (result.ReturnStatus.Equals(ReturnStatus.Ok))
             {
+                // Token erstellen lassen und in die Session speichern
                 var userToken = _userService.LoginUser(result.Value.UserName, result.Value.Password);
                 if (userToken != null)
-                {
-                    //Save token in session object
+                { 
                     HttpContext.Session.SetString("JWToken", userToken);
                 }
                 return Redirect(returnUrl);
-            }
+            } // Error Rückgabe wenn der User nicht verifiziert ist
             else if (result.ReturnStatus.Equals(ReturnStatus.DbError))
             {
                 TempData["Error"] = "Datenbank Verbindung verloren";
@@ -67,14 +70,15 @@ namespace WebServer.Controllers
         [Route("Register")]
         public IActionResult Register(UserModel CurrentUser)
         {
+            // Überprüfen auf gleiche Passwörter
             if (CurrentUser.Password != CurrentUser.ConfirmPassword)
             {
                 TempData["Error"] = "Ungleiche Passwörter";
                 return View("~/Views/User/RegisterView.cshtml");
             }
-
+            // User in der Datenbank registrieren
             var result = _userService.RegisterUser(CurrentUser.UserName, CurrentUser.Email, CurrentUser.Password);
-
+            // Resultat der Registrierung auswerten
             if (result.ReturnStatus.Equals(ReturnStatus.Ok))
             {
                 TempData["Error"] = "Erfolgreich Registriert";
@@ -99,8 +103,10 @@ namespace WebServer.Controllers
         public ActionResult EditUser(UserModel userModel)
         {
             LoginConnector _loginConnector = new LoginConnector();
+            // Überprüfen ob die Passwörter gleich sind
             if (userModel.Password != userModel.ConfirmPassword)
             {
+                // Seite mit Fehlermeldung und den Daten neu öffnen
                 TempData["Error"] = "Ungleiche Passwörter";
                 var idString = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
                 Guid id = Guid.Parse(idString);
@@ -108,6 +114,7 @@ namespace WebServer.Controllers
                 ViewData["user"] = currentUser;
                 return View("~/Views/Home/ManageUser.cshtml");
             }
+            // Die Datenbank mit den neuen Daten updaten und den Benutzer zur Home Website zurück
             var idString2 = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
             Guid id2 = Guid.Parse(idString2);
             var user = _loginConnector.FindById(id2).Value;
@@ -115,7 +122,7 @@ namespace WebServer.Controllers
             _loginConnector.UpsertUser(userModel);
             return RedirectToAction("Index", "Home");
         }
-
+        // Postman Methode um einen JWT zu bekommen
         // POST: AuthController/GetKey
         [HttpPost]
         [Route("GetKey")]

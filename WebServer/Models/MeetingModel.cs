@@ -8,8 +8,10 @@ namespace WebServer.Models
 {
     public class MeetingModel
     {
+        // Angabe für Datenbank als ID
         [BsonId]
         public Guid Id { get; set; }
+        // Angabe für Deutschzeit
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime DateTime { get; set; }
         public double TimeSpan { get; set; }

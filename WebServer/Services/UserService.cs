@@ -16,20 +16,21 @@ namespace WebServer.Services
     {
         private IConfiguration Configuration { get; }
         private readonly LoginConnector loginConnector;
-
+        // Die Configuration objekt für den Zugriff auf den Secret Key holen und einen LoginConnector
         public UserService(IConfiguration configuration)
         {
             Configuration = configuration;
             loginConnector = new LoginConnector();
         }
-
+        // Anmelden eines USeres mit neuem Token
         public string LoginUser(string userId, string password)
         {
+            // USer aus der Datenbank holen
             var userAccess = loginConnector.Find(userId);
             if (userAccess.ReturnStatus != ReturnStatus.Ok) return null;
-
+            // Secret Key aus der Configuration Datei holen
             var key = Encoding.ASCII.GetBytes(Configuration["JWT:Secret"]);
-                
+                // JWToken erstellen mit Expiretime und einem Verschlüsslungs algorithmus und die user claims hinzufügen
             var JWToken = new JwtSecurityToken(
                 issuer: "http://localhost:5001/",
                 audience: "http://localhost:5001/",
@@ -38,10 +39,11 @@ namespace WebServer.Services
                 expires: new DateTimeOffset(DateTime.Now.AddHours(1)).DateTime,
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             );
+            // Token ausgeben und zurück geben
             var token = new JwtSecurityTokenHandler().WriteToken(JWToken);
             return token;
         }
-
+        // Claims für den User erstellen
         private IEnumerable<Claim> GetUserClaims(UserModel user)
         {
             IEnumerable<Claim> claims = new Claim[]
@@ -53,7 +55,7 @@ namespace WebServer.Services
             };
             return claims;
         }
-
+        // Registrieren eines Users
         public LogikReturn<UserModel> RegisterUser(string username, string email, string password)
         {
             var result = loginConnector.Register(username, email, password);

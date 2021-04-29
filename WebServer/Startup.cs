@@ -27,14 +27,14 @@ namespace WebServer
         public void ConfigureServices(IServiceCollection services)
         {
             
-
+            // Hinzufügen des Session services mit einer 60 Minuten expire time
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
             });
             services.AddControllersWithViews();
-            
+            // Secret Key aus der KonfigDatei holen
             var SecretKey = Encoding.ASCII.GetBytes(Configuration["JWT:Secret"]);
-            
+            // Authentifizierung mit dem JWToken als Service hinzufügen 
             services.AddAuthentication(auth =>
                 {
                     auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -87,7 +87,7 @@ namespace WebServer
 
             app.UseSession();
 
-            //Add JWToken to all incoming HTTP Request Header 
+            //Für jeden Request den JWToken aus der Session dem Header hinzufügen
             app.Use(async (context, next) =>
             {
                 var JWToken = context.Session.GetString("JWToken");

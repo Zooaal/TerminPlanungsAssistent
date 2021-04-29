@@ -16,6 +16,7 @@ namespace WebServer.Controllers
         {
             meetingConnector = new MeetingConnector();
         }
+        // Alle Meetings anzeigen ohne eine Authorisierung Nur für Test zwecke dieses Projekts also in wirklicher veröffentlichung rauszunehmen
         // GET: MeetingController/All
         [HttpGet]
         [Route("All")]
@@ -32,9 +33,9 @@ namespace WebServer.Controllers
         [Route("Create")]
         public ActionResult Create(MeetingModel meeting)
         {
+            // Erstellen eines Meetings in die Datenbank
             meetingConnector.InsertMeeting(meeting);
             return RedirectToAction("AdminMeetings", "Home");
-            return View("~/Views/Home/AdminMeetings.cshtml");
         }
 
         // POST: MeetingController/Edit
@@ -44,7 +45,7 @@ namespace WebServer.Controllers
         [Route("Edit/{id}")]
         public ActionResult Edit(Guid id)
         {
-            // Return Edit View with Meeting
+            // Return Edit View mit dem passenden Meeting
             var currentMeeting = meetingConnector.GetMeetingById(new MeetingModel(){Id = id}).Value;
             ViewData["meeting"] = currentMeeting;
             return View("~/Views/Home/ModifyMeeting.cshtml");
@@ -56,9 +57,9 @@ namespace WebServer.Controllers
         [Route("EditMeeting")]
         public ActionResult EditMeeting(MeetingModel meeting)
         {
+            // Das editierte Meeting speichern
             meetingConnector.UpsertMeeting(meeting);
             return RedirectToAction("AdminMeetings", "Home");
-            return View("~/Views/Home/AdminMeetings.cshtml");
         }
         // POST: MeetingController/Cancel
         [HttpPost]
@@ -69,16 +70,19 @@ namespace WebServer.Controllers
         {
             try
             {
+                // Abzuwählendes Meeting aus der Datenbank holen und taken wert auf false setzen
                 var model = meetingConnector.GetMeetingById(new MeetingModel(){Id = id});
                 model.Value.Taken = false;
+                // Meeting wieder geändert abspeichern
                 meetingConnector.UpsertMeeting(model.Value);
+                // Danach Meeting bei dem Benutzer aus der Liste der Datenbank entfernen
                 var idString = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
                 Guid id2 = Guid.Parse(idString);
                 LoginConnector loginConnector = new LoginConnector();
                 var user = loginConnector.FindById(id2).Value;
                 meetingConnector.CancelMeetingForUser(model.Value, user);
+                // Seite neu anzeigen
                 return RedirectToAction("Meetings", "Home");
-                return View("~/Views/Home/Meetings.cshtml");
             }
             catch
             {
@@ -94,9 +98,9 @@ namespace WebServer.Controllers
         {
             try
             {
+                // Meeting aus Datenbank löschen
                 meetingConnector.DeleteMeetingById(new MeetingModel(){Id = id});
                 return RedirectToAction("AdminMeetings", "Home");
-                return View("~/Views/Home/AdminMeetings.cshtml");
             }
             catch
             {
@@ -112,19 +116,21 @@ namespace WebServer.Controllers
         {
             try
             {
+                // Meeting was ausgewählt werden soll aus der Datenbank holen
                 var model =  meetingConnector.GetMeetingById(new MeetingModel(){Id = id});
+                // Überprüfen ob es schon gesetzt ist
                 if (model.Value.Taken)
                     return RedirectToAction("Meetings", "Home");
-
+                // Meeting auf taken setzen und wieder updaten
                 model.Value.Taken = true;
                 meetingConnector.UpsertMeeting(model.Value);
+                // Bei dem Benutzer das Meeting hinzufügen
                 var idString = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
                 Guid id2 = Guid.Parse(idString);
                 LoginConnector loginConnector = new LoginConnector();
                 var user = loginConnector.FindById(id2).Value;
                 meetingConnector.UpsertMeetingForUser(model.Value, user);
                 return RedirectToAction("Meetings", "Home");
-                return View("~/Views/Home/Meetings.cshtml");
             }
             catch
             {

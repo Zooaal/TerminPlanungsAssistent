@@ -22,19 +22,22 @@ namespace WebServer.Controllers
         {
             _logger = logger;
         }
-
+        // View der Main Page
         public IActionResult Index()
         {
             return View();
         }
+        // Anzeigen der Loginoberfläche
         public IActionResult LoginView()
         {
             return View("~/Views/User/LoginView.cshtml");
         }
+        // Anzeigen der Registrierungsoberfläche
         public IActionResult RegisterView()
         {
             return View("~/Views/User/RegisterView.cshtml");
         }
+        // Seite um den momentanen Benutzer mit Daten zu bearbeiten laden
         [Authorized]
         public IActionResult ManageUserView()
         {
@@ -45,29 +48,35 @@ namespace WebServer.Controllers
             ViewData["user"] = user;
             return View("~/Views/Home/ManageUser.cshtml");
         }
+        // Seite mit den Verfügbaren und eigenen Meetings
         [Authorized]
         public IActionResult Meetings()
         {
             var meetingConnector = new MeetingConnector();
             var user = new UserModel();
+            // Wenn der User Authorisiert ist
             if (User.Identity.IsAuthenticated)
             {
+                // Den Momentanen User aus der Datenbank holen
                 var idString = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
                 Guid id = Guid.Parse(idString);
-                //var dict = User.Claims.Where(p => p.Type == ClaimTypes.Email).ToDictionary(p => p.Type, p => p.Value);
-                //email = dict.Values.First();
                 var loginConnector = new LoginConnector(); 
                 user = loginConnector.FindById(id).Value;
             }
+            // Meetings des Momentanen Users holen
             var meetings = meetingConnector.GetUserMeetings(user.Email).Value;
+            // Falls der Benutzer ein Admin ist alle Mettings holen
             if (User.HasClaim(Roles.ADMIN, Roles.ADMIN))
             {
                 var result = meetingConnector.GetAllMeetings().Value;
                 meetings = result.FindAll(m => m.Taken);
             }
+            // Alle nicht vergebenen Meetings holen
             var allMeetings = meetingConnector.GetAllNotTakenMeetings().Value;
+            //Meetings alle in der List nach Datum aufsteigend Sortieren
             meetings = meetings.OrderBy(x => x.DateTime).ToList();
             allMeetings = allMeetings.OrderBy(x => x.DateTime).ToList();
+            // Meetings für die CSHTML Seite speichern 
             ViewData["allMeetings"] = allMeetings;
             ViewData["meetings"] = meetings;
             return View();
@@ -75,13 +84,14 @@ namespace WebServer.Controllers
         [Authorized]
         public IActionResult AdminMeetings()
         {
+            // Alle Meetings holen und speichern für die CSHTML Seite
             var meetingConnector = new MeetingConnector();
             var meetings = meetingConnector.GetAllMeetings().Value;
             meetings = meetings.OrderBy(x => x.DateTime).ToList();
             ViewData["meetings"] = meetings;
             return View();
         }
-
+        // Anzeigen der Error Seite
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
