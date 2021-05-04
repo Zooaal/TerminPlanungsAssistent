@@ -26,6 +26,74 @@ namespace WebServer.Controllers
             return Ok(meetings.Value);
         }
 
+        // Meeting auswahl für die Kalender ansicht
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        [Authorized]
+        [Route("AllEvents")]
+        public IActionResult AllEvents()
+        {
+            //Überprüfen ob Admin
+            if (User.HasClaim("ADMIN", "ADMIN"))
+            {
+                //Alle für den Admin freien und gebuchten Meetings holen
+                var meetings = meetingConnector.GetAllMeetings().Value;
+                var takenMeetings = meetings.Where(m => m.Taken == true).ToList();
+                var freeMeetings = meetings.Where(m => m.Taken == false).ToList();
+                //Alle gebuchten Meetings in das Kalender format
+                var events1 = takenMeetings.Select(e => new
+                {
+                    id = e.Id.ToString(),
+                    title = "Gebuchter Termin",
+                    start = e.DateTime.ToString("yyyy-MM-dd HH:mm"),
+                    end = e.DateTime.AddHours(e.TimeSpan).ToString("yyyy-MM-dd HH:mm"),
+                    color = "red"
+                }).ToList();
+                //Alle freien Meetings in das Kalender format
+                var events2 = freeMeetings.Select(e => new
+                {
+                    id = e.Id.ToString(),
+                    title = "Freier Termin",
+                    start = e.DateTime.ToString("yyyy-MM-dd HH:mm"),
+                    end = e.DateTime.AddHours(e.TimeSpan).ToString("yyyy-MM-dd HH:mm"),
+                    color = "green"
+                }).ToList();
+                // Alle Meetings zusammen führen und als JSON zurück senden
+                var events = events1;
+                events.AddRange(events2);
+                return Json(events);
+            }
+            else
+            {
+                // Alle freien und die gebuchten Termine des USeres holen
+                var meetings = meetingConnector.GetAllMeetings().Value;
+                var freeMeetings = meetings.Where(m => m.Taken == false).ToList();
+                var ownMeetings = meetingConnector.GetUserMeetings(User.Claims
+                    .First(c => c.Type == ClaimTypes.Email).Value.ToString()).Value;
+                //Alle freien Meetings in das Kalender format
+                var events1 = freeMeetings.Select(e => new
+                {
+                    id = e.Id.ToString(),
+                    title = "Freier Termin",
+                    start = e.DateTime.ToString("yyyy-MM-dd HH:mm"),
+                    end = e.DateTime.AddHours(e.TimeSpan).ToString("yyyy-MM-dd HH:mm"),
+                    color = "green"
+                }).ToList();
+                //Alle eigen gebuchte Meetings in das Kalender format
+                var events2 = ownMeetings.Select(e => new
+                {
+                    id = e.Id.ToString(),
+                    title = "Mein Termin",
+                    start = e.DateTime.ToString("yyyy-MM-dd HH:mm"),
+                    end = e.DateTime.AddHours(e.TimeSpan).ToString("yyyy-MM-dd HH:mm"),
+                    color = "blue"
+                }).ToList();
+                // Alle Meetings zusammen führen und als JSON zurück senden
+                var events = events1;
+                events.AddRange(events2);
+                return Json(events);
+            }
+        }
         // POST: MeetingController/Create
         [HttpPost]
         [Authorized]
