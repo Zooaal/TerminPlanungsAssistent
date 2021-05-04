@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="card">
+<div class="card" style="width: 50%; margin: auto">
     <div class="card-header">
         <nav class="navbar-expand-lg navbar-light">
-            <ul class="navbar-nav flex-grow-1">
+            <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="LoginView">Anmelden</a>
                 </li>
@@ -25,4 +25,17 @@
 
 @section Scripts{
     @RenderSection("Scripts", required: false)
+    
+    <script>
+        $(function() {
+            var current = location.pathname;
+            $('.nav-tabs li a').each(function() {
+                var $this = $(this);
+                if (current.indexOf($this.attr('href')) !== -1) {
+                    $this.addClass('active');
+                }
+            })
+        })
+    </script>
+
 }

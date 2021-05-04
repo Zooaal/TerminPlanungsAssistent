@@ -28,7 +28,6 @@ namespace WebServer.Controllers
 
         // Meeting auswahl für die Kalender ansicht
         [HttpGet]
-        [ValidateAntiForgeryToken]
         [Authorized]
         [Route("AllEvents")]
         public IActionResult AllEvents()
