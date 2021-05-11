@@ -56,7 +56,7 @@ namespace WebServer.Services
                 return new LogikReturn<UserModel>(ReturnStatus.DbError, null);
             }
         }
-        // Verifiszierung des Logins mit Hilfe von Bcrypt
+        // Verifizierung des Logins mit Hilfe von Bcrypt
         public LogikReturn<UserModel> VerifyLogin(string userId, string password)
         {
             try

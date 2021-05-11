@@ -55,7 +55,7 @@ namespace WebServer.Controllers
             } // Error Rückgabe wenn der User nicht verifiziert ist
             else if (result.ReturnStatus.Equals(ReturnStatus.DbError))
             {
-                TempData["Error"] = "Datenbank Verbindung verloren";
+                TempData["Error"] = "Email oder Passwort ist nicht korrekt";
                 return View("~/Views/User/LoginView.cshtml");
             }
             else
