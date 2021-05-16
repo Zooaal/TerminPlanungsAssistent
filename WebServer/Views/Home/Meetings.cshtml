@@ -37,12 +37,12 @@
                                 <th scope="row">@count</th>
                                 <td>
                                     @{
-                                        @item.DateTime.Date.ToShortDateString()
+                                        @item.DateTime.Date.ToString("dd/MM/yyyy")
                                         ;}
                                 </td>
                                 <td>
                                     @{
-                                        @item.DateTime.ToShortTimeString()
+                                        @item.DateTime.ToString("dd/MM/yyyy")
                                         ;}
                                 </td>
                                 <td>@item.TimeSpan Stunden</td>

@@ -26,13 +26,13 @@
 
         <div class="row">
             <h6>Passwort:</h6>
-            <input type="password" asp-for="Password" class="form-control" minlength="1" required/>
+            <input type="password" asp-for="Password" class="form-control" minlength="8" required/>
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
         <div class="row">
             <h6>Passwort wiederholen:</h6>
-            <input type="password" asp-for="ConfirmPassword" class="form-control" minlength="1" required/>
+            <input type="password" asp-for="ConfirmPassword" class="form-control" minlength="8" required/>
             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         </div>
 
