@@ -60,7 +60,7 @@
     Erreichen Sie eine Bewertung „A“
     ```
     
-- [ ] 9. Präsentation Ihres Projekts im Zeitumfang von max. 20 Minuten mit den Themen <br>
+- [x] 9. Präsentation Ihres Projekts im Zeitumfang von max. 20 Minuten mit den Themen <br>
     a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder <br>
     b. Welche Frameworks und Technologien haben Sie verwendet? (Skriptsprache,
        Frameworks, Webserver, ggf. Protokolle) <br>
@@ -80,9 +80,9 @@
     Verwenden Sie eine Quellcodeverwaltung
     ```
 
-- [ ] 10. Dokumentieren Sie bedeutende Stellen Ihres Quellcodes mit erklärendem
+- [x] 10. Dokumentieren Sie bedeutende Stellen Ihres Quellcodes mit erklärendem
     Kommentartext
-- [ ] 11. Kurzdokumentation <br>
+- [x] 11. Kurzdokumentation <br>
     a. Kurze Übersicht Team sowie Zeitaufwand und Verteilung auf Mitglieder mit
        Selbsteinschätzung <br>
     b. Test-Zugangsdaten sowie Url (und weitere Informationen sofern notwendig)
